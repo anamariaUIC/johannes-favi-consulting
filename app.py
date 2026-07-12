@@ -408,18 +408,18 @@ elif st.session_state.page == "About":
     st.markdown("<div class='section-label'>Career Highlights</div>", unsafe_allow_html=True)
     st.markdown("<div class='section-title'>Selected Experience</div>", unsafe_allow_html=True)
     highlights = [
-        ("Director of Program Housing", "Bridge Communities", "Oct 2025 – Present", None),
-        ("Advisor, Immigrant, Migrant & Refugee Rights", "Chicago Mayor's Office", "May 2024 – Present", None),
+        ("Director of Program Housing", "Bridge Communities", "Oct 2025 - Present", None),
+        ("Advisor, Immigrant, Migrant & Refugee Rights", "Chicago Mayor's Office", "May 2024 - Present", None),
         (
             "Appointed Member, Black Immigrants Task Force",
             "Office of the Governor of Illinois",
-            "Jan 2025 – Dec 2025",
+            "Jan 2025 - Dec 2025",
             "https://www.ilga.gov/Documents/Reports/ReportsSubmitted/6390RSGAEmail14131RSGAAttachReport%20of%20the%20Task%20Force%20on%20Black%20Immigrants_12-29-2025.pdf",
         ),
-        ("Deputy Director & Board Member", "Illinois Community for Displaced Immigrants (ICDI)", "May 2020 – Apr 2025", None),
-        ("Emerging Leaders Fellow", "Chicago Council on Global Affairs", "Dec 2024 – Nov 2025", None),
-        ("Inaugural Freedom Fellow", "Detention Watch Network", "Oct 2023 – Sep 2024", None),
-        ("Immigration Advisory Council Member", "Cook County State's Attorney's Office", "Jan 2024 – Dec 2024", None),
+        ("Deputy Director & Board Member", "Illinois Community for Displaced Immigrants (ICDI)", "May 2020 - Apr 2025", None),
+        ("Emerging Leaders Fellow", "Chicago Council on Global Affairs", "Dec 2024 - Nov 2025", None),
+        ("Inaugural Freedom Fellow", "Detention Watch Network", "Oct 2023 - Sep 2024", None),
+        ("Immigration Advisory Council Member", "Cook County State's Attorney's Office", "Jan 2024 - Dec 2024", None),
     ]
     for role, org, dates, link in highlights:
         title_html = (
@@ -462,9 +462,8 @@ elif st.session_state.page == "About":
         st.image("assets/johannes-favi-family.jpg", use_container_width=True)
     with pcol2:
         st.write(
-            "Johannes is a proud father of three. Outside of his professional work, family and "
-            "community remain central to how he approaches leadership, advocacy, and the long-term "
-            "relationships he builds with the organizations he serves."
+            "Johannes is a proud father of three. He enjoys outdoor activities, traveling, and "
+            "exploring cultures around the world with his partner and kids."
         )
 
     st.markdown("<div class='divider'></div>", unsafe_allow_html=True)
@@ -532,12 +531,17 @@ elif st.session_state.page == "Speaking":
     st.markdown("<div class='section-title'>Speaking & Training</div>", unsafe_allow_html=True)
     st.write(
         "I am available for conferences, university lectures, leadership retreats, community "
-        "forums, and executive convenings — bringing practical, research-grounded insight to "
+        "forums, and executive convenings, bringing practical, research-grounded insight to "
         "audiences working across immigration, policy, housing, and nonprofit leadership."
+    )
+    st.image(
+        "assets/johannes-favi-speaking.jpg",
+        caption="Panelist, DePaul Migration Collaborative Symposium",
+        use_container_width=True,
     )
     st.markdown(
         "<div class='card'><h4>Formats</h4><p>Keynotes, panel moderation, customized workshops, "
-        "leadership retreats, and university lectures — tailored to your audience and objectives.</p></div>",
+        "leadership retreats, and university lectures, tailored to your audience and objectives.</p></div>",
         unsafe_allow_html=True,
     )
     st.link_button("Inquire About Speaking", f"mailto:{CONTACT_EMAIL}?subject=Speaking%20Inquiry")
@@ -550,7 +554,7 @@ elif st.session_state.page == "Advisory":
     st.markdown("<div class='section-title'>Advisory Support</div>", unsafe_allow_html=True)
     st.write(
         "I provide long-term advisory support and fractional executive leadership for organizations "
-        "that need strategic guidance and steady leadership — whether navigating a specific "
+        "that need strategic guidance and steady leadership, whether navigating a specific "
         "initiative or building longer-term institutional capacity."
     )
     st.markdown(
@@ -573,7 +577,7 @@ elif st.session_state.page == "Contact":
         f"[{CONTACT_EMAIL}](mailto:{CONTACT_EMAIL})."
     )
 
-    # Real HTML form posted to FormSubmit — delivers straight to the inbox
+    # Real HTML form posted to FormSubmit, delivers straight to the inbox
     # above with no backend or email credentials required.
     contact_form_html = f"""
     <style>
@@ -621,7 +625,7 @@ elif st.session_state.page == "Contact":
         .cf-submit[disabled] {{ opacity: 0.6; cursor: default; }}
     </style>
     <form id="cf-form">
-        <input type="hidden" name="_subject" value="New inquiry — Johannes Favi consulting site">
+        <input type="hidden" name="_subject" value="New inquiry: Johannes Favi consulting site">
         <input type="hidden" name="_template" value="table">
 
         <div class="cf-row">
@@ -667,18 +671,18 @@ elif st.session_state.page == "Contact":
             .then(function (result) {{
                 if (result.ok && result.json && result.json.success !== 'false') {{
                     status.className = 'cf-status ok';
-                    status.textContent = "Message sent — thank you. I'll be in touch soon.";
+                    status.textContent = "Message sent. Thank you, I'll be in touch soon.";
                     form.reset();
                 }} else {{
                     status.className = 'cf-status err';
-                    status.textContent = 'Something went wrong sending this — please email '
+                    status.textContent = 'Something went wrong sending this, please email '
                         + '{CONTACT_EMAIL}' + ' directly. (' + JSON.stringify(result.json) + ')';
                 }}
                 status.style.display = 'block';
             }})
             .catch(function (err) {{
                 status.className = 'cf-status err';
-                status.textContent = 'Network error — please email {CONTACT_EMAIL} directly instead. (' + err + ')';
+                status.textContent = 'Network error, please email {CONTACT_EMAIL} directly instead. (' + err + ')';
                 status.style.display = 'block';
             }})
             .finally(function () {{
@@ -695,7 +699,7 @@ elif st.session_state.page == "Contact":
 
     st.caption(
         "Note: the first message sent from a given URL triggers a one-time confirmation email "
-        f"from FormSubmit to {CONTACT_EMAIL} — it must be confirmed once (check spam/promotions "
+        f"from FormSubmit to {CONTACT_EMAIL}; it must be confirmed once (check spam/promotions "
         "too) before messages start arriving normally. This applies separately to localhost and "
         "to your deployed site, since FormSubmit ties activation to the sending domain."
     )
