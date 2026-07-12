@@ -258,15 +258,36 @@ st.markdown(
             color: #6b7280;
             letter-spacing: 0.5px;
         }
+        .header-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            padding: 0.3rem 0 0.6rem 0;
+        }
+        .linkedin-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            background: #10233f;
+            color: #ffffff !important;
+            text-decoration: none !important;
+            padding: 0.5rem 1.1rem;
+            border-radius: 6px;
+            font-size: 0.88rem;
+            font-weight: 600;
+        }
+        .linkedin-link:hover { background: #1c3a63; }
     </style>
     """,
     unsafe_allow_html=True,
 )
 
 st.markdown(
-    "<div style='padding:0.3rem 0 0.6rem 0;'>"
-    "<div class='brand-name'>Johannes Favi</div>"
-    "<div class='brand-subtitle'>Strategic Consulting</div>"
+    "<div class='header-row'>"
+    "<div><div class='brand-name'>Johannes Favi</div>"
+    "<div class='brand-subtitle'>Strategic Consulting</div></div>"
+    "<a class='linkedin-link' href='https://www.linkedin.com/in/johannesfavi/' target='_blank'>"
+    "in&nbsp; LinkedIn ↗</a>"
     "</div>",
     unsafe_allow_html=True,
 )
@@ -343,13 +364,18 @@ if st.session_state.page == "Home":
         "with me when they need a trusted thought partner, an experienced facilitator, or a strategic "
         "advisor who can help move from complexity to clarity and from ideas to implementation."
     )
-    for point in [
-        "17+ years of executive leadership experience",
-        "Expertise across policy, systems, and organizational strategy",
-        "Strong background in research, planning, and implementation",
-        "Deep commitment to equity, access, and community impact",
-    ]:
-        st.markdown(f"<div class='stat-line'>&#9670;&nbsp;&nbsp;{point}</div>", unsafe_allow_html=True)
+    points = [
+        ("17+ years of executive leadership experience", "https://www.linkedin.com/in/johannesfavi/"),
+        ("Expertise across policy, systems, and organizational strategy", None),
+        (
+            "Strong background in research, planning, and implementation",
+            "https://www.ilga.gov/Documents/Reports/ReportsSubmitted/6390RSGAEmail14131RSGAAttachReport%20of%20the%20Task%20Force%20on%20Black%20Immigrants_12-29-2025.pdf",
+        ),
+        ("Deep commitment to equity, access, and community impact", None),
+    ]
+    for text, url in points:
+        label = f"<a href='{url}' target='_blank' style='color:inherit;text-decoration:underline;text-decoration-color:#c9a86a;'>{text}</a>" if url else text
+        st.markdown(f"<div class='stat-line'>&#9670;&nbsp;&nbsp;{label}</div>", unsafe_allow_html=True)
 
     st.markdown(
         """
@@ -379,6 +405,40 @@ elif st.session_state.page == "About":
 
     st.markdown("<div class='divider'></div>", unsafe_allow_html=True)
 
+    st.markdown("<div class='section-label'>Career Highlights</div>", unsafe_allow_html=True)
+    st.markdown("<div class='section-title'>Selected Experience</div>", unsafe_allow_html=True)
+    highlights = [
+        ("Director of Program Housing", "Bridge Communities", "Oct 2025 – Present", None),
+        ("Advisor, Immigrant, Migrant & Refugee Rights", "Chicago Mayor's Office", "May 2024 – Present", None),
+        (
+            "Appointed Member, Black Immigrants Task Force",
+            "Office of the Governor of Illinois",
+            "Jan 2025 – Dec 2025",
+            "https://www.ilga.gov/Documents/Reports/ReportsSubmitted/6390RSGAEmail14131RSGAAttachReport%20of%20the%20Task%20Force%20on%20Black%20Immigrants_12-29-2025.pdf",
+        ),
+        ("Deputy Director & Board Member", "Illinois Community for Displaced Immigrants (ICDI)", "May 2020 – Apr 2025", None),
+        ("Emerging Leaders Fellow", "Chicago Council on Global Affairs", "Dec 2024 – Nov 2025", None),
+        ("Inaugural Freedom Fellow", "Detention Watch Network", "Oct 2023 – Sep 2024", None),
+        ("Immigration Advisory Council Member", "Cook County State's Attorney's Office", "Jan 2024 – Dec 2024", None),
+    ]
+    for role, org, dates, link in highlights:
+        title_html = (
+            f"<a href='{link}' target='_blank' style='color:#10233f;text-decoration:underline;"
+            f"text-decoration-color:#c9a86a;'>{role}</a>"
+            if link else role
+        )
+        extra = "  ·  <span style='color:#b8924a;'>Read the report ↗</span>" if link else ""
+        st.markdown(
+            f"<div class='card' style='margin-bottom:0.6rem;'>"
+            f"<h4 style='margin-bottom:0.15rem;'>{title_html}{extra}</h4>"
+            f"<p style='margin-bottom:0.1rem;'>{org}</p>"
+            f"<p style='color:#9aa0a8;font-size:0.82rem;margin:0;'>{dates}</p>"
+            f"</div>",
+            unsafe_allow_html=True,
+        )
+
+    st.markdown("<div class='divider'></div>", unsafe_allow_html=True)
+
     st.markdown("<div class='section-label'>Signature Expertise</div>", unsafe_allow_html=True)
     st.markdown("<div class='section-title'>Areas of Focus</div>", unsafe_allow_html=True)
     areas = [
@@ -393,6 +453,19 @@ elif st.session_state.page == "About":
         "".join([f"<span class='tag'>{a}</span>" for a in areas]),
         unsafe_allow_html=True,
     )
+
+    st.markdown("<div class='divider'></div>", unsafe_allow_html=True)
+
+    st.markdown("<div class='section-label'>Beyond the Work</div>", unsafe_allow_html=True)
+    pcol1, pcol2 = st.columns([1, 2])
+    with pcol1:
+        st.image("assets/johannes-favi-family.jpg", use_container_width=True)
+    with pcol2:
+        st.write(
+            "Johannes is a proud father of three. Outside of his professional work, family and "
+            "community remain central to how he approaches leadership, advocacy, and the long-term "
+            "relationships he builds with the organizations he serves."
+        )
 
     st.markdown("<div class='divider'></div>", unsafe_allow_html=True)
     col1, col2 = st.columns(2)
