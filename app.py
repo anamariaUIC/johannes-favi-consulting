@@ -919,15 +919,6 @@ TIMELINE = [
     ),
 ]
 
-IMPACT_AREAS = [
-    ("Policy Change", "Contributions to advocacy surrounding the Illinois Way Forward Act."),
-    ("Public Leadership", "Testimony before the U.S. House Judiciary Committee."),
-    ("Housing Systems", "Leadership in housing strategy and support for vulnerable populations."),
-    ("Mental Health", "Creation of Caged Dreams and related advocacy."),
-    ("Public Education", "University lectures, documentary screenings, and conference presentations."),
-    ("Community Building", "Cross-sector partnerships with nonprofits, universities, and government agencies."),
-]
-
 TESTIMONIALS = {
     "Government": [
         (
@@ -1762,23 +1753,222 @@ elif st.session_state.page == "Media":
 # ----------------------------------------------------------------------------
 elif st.session_state.page == "Impact":
     st.markdown("<div class='section-label'>Impact</div>", unsafe_allow_html=True)
-    st.markdown("<div class='section-title'>Outcomes, Not Just Activities</div>", unsafe_allow_html=True)
+    st.markdown("<div class='section-title'>Turning Experience into Systems Change</div>", unsafe_allow_html=True)
     st.write(
-        "Many consultants describe what they do. Fewer clearly demonstrate the change their work "
-        "has produced. Johannes' work is organized here around the outcomes it has helped create."
+        "Throughout his career, Johannes has worked at the intersection of public policy, nonprofit "
+        "leadership, housing, mental health, and community engagement. His work has contributed to "
+        "legislative advocacy, informed public policy, strengthened organizations, and helped build "
+        "more inclusive systems for immigrants and underserved communities. Whether advising "
+        "organizations, collaborating with government partners, or educating future leaders, his "
+        "focus remains the same: creating practical, people-centered solutions that produce lasting "
+        "impact."
     )
 
-    for title, desc in IMPACT_AREAS:
-        st.markdown(
-            f"<div class='card' style='margin-bottom:0.8rem;'><h4>{title}</h4><p>{desc}</p></div>",
-            unsafe_allow_html=True,
+    st.markdown("<div class='divider'></div>", unsafe_allow_html=True)
+
+    # ---- Policy Change ----
+    st.markdown("<div class='section-label'>Policy Change</div>", unsafe_allow_html=True)
+    st.markdown("<div class='section-title'>Advancing Policies that Strengthen Communities</div>", unsafe_allow_html=True)
+    st.write(
+        "Johannes has contributed to statewide advocacy efforts that helped shape conversations "
+        "around immigrant rights, community integration, and equitable public policy. As former "
+        "Deputy Director of the Illinois Community for Displaced Immigrants (ICDI), he worked "
+        "alongside elected officials, nonprofit leaders, and community organizations in advocacy "
+        "efforts surrounding the Illinois Way Forward Act, landmark legislation that ended local "
+        "government contracts for immigrant detention facilities in Illinois."
+    )
+    st.write(
+        "More recently, Johannes served on the Illinois Task Force on Black Immigrants, contributing "
+        "to recommendations submitted to the Illinois General Assembly addressing housing, workforce "
+        "development, healthcare, education, economic opportunity, and civic participation. His "
+        "policy work reflects a commitment to ensuring that community voices are translated into "
+        "practical, evidence-informed solutions."
+    )
+    st.write("**Featured Work**")
+    st.markdown(
+        "<div class='checklist'>"
+        + "".join(
+            f"<span class='checklist-item'><span class='check'>&#10003;</span>{a}</span>"
+            for a in ["Illinois Way Forward advocacy", "Illinois Task Force on Black Immigrants",
+                      "Public policy strategy", "Government advisory"]
         )
+        + "</div>",
+        unsafe_allow_html=True,
+    )
+    st.write("")
+    st.link_button("Read the Illinois Task Force Report", TASK_FORCE_REPORT_URL)
 
     st.markdown("<div class='divider'></div>", unsafe_allow_html=True)
-    st.write("**Want to discuss the outcomes your organization needs? Let's connect.**")
-    if st.button("Schedule a Consultation", key="impact_cta1"):
-        go_to("Contact")
-        st.rerun()
+
+    # ---- Public Leadership ----
+    st.markdown("<div class='section-label'>Public Leadership</div>", unsafe_allow_html=True)
+    st.markdown("<div class='section-title'>Leading Conversations That Influence Public Policy</div>", unsafe_allow_html=True)
+    st.write(
+        "Johannes has brought lived experience together with policy expertise to inform conversations "
+        "at the local, state, and national levels. In 2020, he shared testimony before the U.S. House "
+        "Judiciary Committee, providing firsthand insight into immigration detention during the "
+        "COVID-19 pandemic and advocating for more humane approaches to immigration policy."
+    )
+    st.write(
+        "Beyond legislative engagement, he has advised public officials, participated in statewide "
+        "initiatives, and worked with government agencies and community partners to improve services "
+        "for immigrant and underserved populations."
+    )
+    st.write("**Selected Leadership**")
+    st.markdown(
+        "<div class='checklist'>"
+        + "".join(
+            f"<span class='checklist-item'><span class='check'>&#10003;</span>{a}</span>"
+            for a in ["Congressional testimony", "Chicago New Arrivals Cabinet",
+                      "Illinois Task Force on Black Immigrants", "Cross-sector policy collaboration"]
+        )
+        + "</div>",
+        unsafe_allow_html=True,
+    )
+
+    st.markdown("<div class='divider'></div>", unsafe_allow_html=True)
+
+    # ---- Housing Systems ----
+    st.markdown("<div class='section-label'>Housing Systems</div>", unsafe_allow_html=True)
+    st.markdown("<div class='section-title'>Building Housing Solutions That Support Long-Term Stability</div>", unsafe_allow_html=True)
+    st.write(
+        "Housing is more than shelter; it is the foundation for health, employment, education, and "
+        "community participation. As Director of Program Housing at Bridge Communities, Johannes "
+        "leads initiatives that strengthen housing access and long-term stability for vulnerable "
+        "individuals and families."
+    )
+    st.write(
+        "His experience spans emergency response, housing strategy, systems coordination, immigrant "
+        "integration, and program development. By connecting housing providers, nonprofit "
+        "organizations, government agencies, and community partners, he helps create practical "
+        "solutions that address both immediate needs and long-term outcomes."
+    )
+    st.write("**Areas of Focus**")
+    st.markdown(
+        "<div class='checklist'>"
+        + "".join(
+            f"<span class='checklist-item'><span class='check'>&#10003;</span>{a}</span>"
+            for a in ["Housing strategy", "Homelessness response", "Program development",
+                      "Systems coordination", "Community partnerships"]
+        )
+        + "</div>",
+        unsafe_allow_html=True,
+    )
+
+    st.markdown("<div class='divider'></div>", unsafe_allow_html=True)
+
+    # ---- Mental Health ----
+    st.markdown("<div class='section-label'>Mental Health</div>", unsafe_allow_html=True)
+    st.markdown("<div class='section-title'>Promoting Healing Through Storytelling and Advocacy</div>", unsafe_allow_html=True)
+    st.write(
+        "Following his own experience with immigration detention, Johannes founded Caged Dreams, an "
+        "initiative dedicated to raising awareness of the mental health impacts of detention and "
+        "displacement while promoting healing through education, advocacy, and community support."
+    )
+    st.write(
+        "The project began with the documentary Caged Dreams, which has been screened at "
+        "universities, community organizations, and public forums throughout the United States. "
+        "Today, Caged Dreams continues to foster dialogue around trauma, resilience, and immigrant "
+        "mental health while working to expand access to culturally responsive support for newly "
+        "arrived communities."
+    )
+    st.write("**Featured Initiative**")
+    st.markdown(
+        "<div class='checklist'>"
+        + "".join(
+            f"<span class='checklist-item'><span class='check'>&#10003;</span>{a}</span>"
+            for a in ["Founder & CEO, Caged Dreams", "Documentary filmmaker",
+                      "Mental health advocacy", "Community education"]
+        )
+        + "</div>",
+        unsafe_allow_html=True,
+    )
+    st.write("")
+    mh_col1, mh_col2 = st.columns(2)
+    with mh_col1:
+        st.link_button("Visit Caged Dreams", CAGED_DREAMS_URL, use_container_width=True)
+    with mh_col2:
+        st.link_button("Watch Full Film", CAGED_DREAMS_FILM_URL, use_container_width=True)
+
+    st.markdown("<div class='divider'></div>", unsafe_allow_html=True)
+
+    # ---- Public Education ----
+    st.markdown("<div class='section-label'>Public Education</div>", unsafe_allow_html=True)
+    st.markdown("<div class='section-title'>Translating Complex Issues into Actionable Knowledge</div>", unsafe_allow_html=True)
+    st.write(
+        "Johannes is an experienced speaker and educator who has presented to universities, "
+        "professional associations, nonprofit organizations, government agencies, and community "
+        "groups across the United States."
+    )
+    st.write(
+        "His presentations combine lived experience, policy expertise, research, and practical "
+        "leadership to help audiences better understand immigration, housing, organizational "
+        "leadership, public policy, and community engagement."
+    )
+    st.write("**Selected speaking engagements include**")
+    st.markdown(
+        "".join(f"<span class='tag'>{s}</span>" for s in [
+            "University of Chicago", "University of Illinois Chicago", "DePaul University",
+            "African Studies Association Annual Meeting", "DuPage Immigrant Integration Forum",
+            "Civic Cinema Series", "Community leadership forums",
+        ]),
+        unsafe_allow_html=True,
+    )
+    st.write("")
+    st.write(
+        "Whether delivering a keynote, facilitating a workshop, or leading a policy discussion, "
+        "Johannes focuses on helping audiences move from awareness to action."
+    )
+
+    st.markdown("<div class='divider'></div>", unsafe_allow_html=True)
+
+    # ---- Community Building ----
+    st.markdown("<div class='section-label'>Community Building</div>", unsafe_allow_html=True)
+    st.markdown("<div class='section-title'>Creating Partnerships That Strengthen Communities</div>", unsafe_allow_html=True)
+    st.write(
+        "Meaningful change requires collaboration across sectors. Throughout his career, Johannes has "
+        "built partnerships connecting nonprofits, universities, government agencies, healthcare "
+        "organizations, foundations, faith communities, and grassroots leaders around shared goals."
+    )
+    st.write(
+        "His collaborative work has included organizations such as Bridge Communities, the Illinois "
+        "Community for Displaced Immigrants, Interfaith Community for Detained Immigrants, the "
+        "National Immigrant Justice Center, Detention Watch Network, ICIRR, the University of "
+        "Chicago, the University of Illinois Chicago, DePaul University, and numerous community-based "
+        "organizations."
+    )
+    st.write(
+        "By bringing together diverse perspectives and building trust across institutions, Johannes "
+        "helps organizations move beyond isolated initiatives toward coordinated, sustainable "
+        "solutions that create lasting community impact."
+    )
+
+    st.markdown("<div class='divider'></div>", unsafe_allow_html=True)
+
+    # ---- Closing ----
+    st.markdown("<div class='section-label'>Closing</div>", unsafe_allow_html=True)
+    st.markdown("<div class='section-title'>Creating Impact Through Partnership</div>", unsafe_allow_html=True)
+    st.write(
+        "Every organization faces complex challenges that require thoughtful leadership, practical "
+        "strategy, and meaningful collaboration. Johannes partners with mission-driven organizations "
+        "to strengthen systems, develop effective strategies, and translate ideas into measurable "
+        "results."
+    )
+    st.write(
+        "Whether supporting public agencies, nonprofit organizations, universities, healthcare "
+        "systems, or foundations, his approach combines policy expertise, organizational leadership, "
+        "and lived experience to help clients build stronger communities and achieve lasting impact."
+    )
+    st.write("")
+    close_col1, close_col2 = st.columns(2)
+    with close_col1:
+        if st.button("Schedule a Consultation", key="impact_cta1", use_container_width=True):
+            go_to("Contact")
+            st.rerun()
+    with close_col2:
+        if st.button("Explore Services", key="impact_cta2", use_container_width=True):
+            go_to("Services")
+            st.rerun()
 
 # ----------------------------------------------------------------------------
 # TESTIMONIALS
