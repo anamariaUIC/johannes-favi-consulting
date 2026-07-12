@@ -1,3 +1,4 @@
+import base64
 import streamlit as st
 import streamlit.components.v1 as components
 
@@ -12,6 +13,17 @@ st.set_page_config(
 )
 
 CONTACT_EMAIL = "contactcageddreams@gmail.com"
+
+
+def _img_to_data_uri(path: str) -> str:
+    """Read a local image file and return it as a base64 data URI,
+    so it can be embedded directly inside an HTML/markdown block."""
+    with open(path, "rb") as f:
+        encoded = base64.b64encode(f.read()).decode()
+    return f"data:image/jpeg;base64,{encoded}"
+
+
+HERO_PHOTO_URI = _img_to_data_uri("assets/johannes-favi-hero.jpg")
 
 # ----------------------------------------------------------------------------
 # GLOBAL STYLE
@@ -49,10 +61,30 @@ st.markdown(
         /* Hero */
         .hero {
             background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 100%);
-            padding: 4rem 3rem;
+            padding: 3rem 3rem;
             border-radius: 14px;
             color: #ffffff;
             margin-bottom: 2.5rem;
+        }
+        .hero-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 2.5rem;
+        }
+        .hero-text { flex: 1.4; min-width: 0; }
+        .hero-photo {
+            flex: 1;
+            display: flex;
+            justify-content: flex-end;
+        }
+        .hero-photo img {
+            width: 100%;
+            max-width: 260px;
+            border-radius: 14px;
+            box-shadow: 0 12px 28px rgba(0,0,0,0.35);
+            object-fit: cover;
+            border: 3px solid rgba(255,255,255,0.12);
         }
         .hero h1 {
             color: #ffffff;
@@ -182,26 +214,94 @@ st.markdown(
 # ----------------------------------------------------------------------------
 # NAVIGATION
 # ----------------------------------------------------------------------------
+PAGES = ["Home", "About", "Services", "Speaking", "Advisory", "Contact"]
+if "page" not in st.session_state:
+    st.session_state.page = "Home"
+
+def go_to(page_name: str):
+    st.session_state.page = page_name
+
 st.markdown(
-    "<div style='display:flex;justify-content:space-between;align-items:center;padding:0.5rem 0 1.2rem 0;'>"
-    "<div style='font-family:Playfair Display, serif;font-size:1.4rem;font-weight:700;color:#10233f;'>Johannes Favi</div>"
-    "</div>",
+    """
+    <style>
+        .st-key-brand_photo img {
+            border-radius: 50%;
+            width: 56px;
+            height: 56px;
+            object-fit: cover;
+            object-position: center 20%;
+        }
+        .st-key-nav_bar button {
+            background: transparent !important;
+            color: #10233f !important;
+            border: none !important;
+            border-bottom: 3px solid transparent !important;
+            border-radius: 0 !important;
+            font-weight: 500 !important;
+            padding: 0.3rem 0.2rem 0.6rem 0.2rem !important;
+            box-shadow: none !important;
+        }
+        .st-key-nav_bar button:hover {
+            color: #b8924a !important;
+            background: transparent !important;
+            border-bottom: 3px solid #e6d5b0 !important;
+        }
+        .nav-active {
+            color: #b8924a;
+            font-weight: 600;
+            border-bottom: 3px solid #b8924a;
+            padding: 0.3rem 0.2rem 0.6rem 0.2rem;
+            display: inline-block;
+        }
+    </style>
+    """,
     unsafe_allow_html=True,
 )
 
-tabs = st.tabs(["Home", "About", "Services", "Speaking", "Advisory", "Contact"])
+brand_col1, brand_col2 = st.columns([1, 8])
+with brand_col1:
+    with st.container(key="brand_photo"):
+        st.image("assets/johannes-favi-headshot.jpg", width=56)
+with brand_col2:
+    st.markdown(
+        "<div style='padding-top:2px;'>"
+        "<div style='font-family:Playfair Display, serif;font-size:1.4rem;font-weight:700;color:#10233f;line-height:1.1;'>Johannes Favi</div>"
+        "<div style='font-size:0.78rem;color:#6b7280;'>Strategic Consulting</div>"
+        "</div>",
+        unsafe_allow_html=True,
+    )
+
+with st.container(key="nav_bar"):
+    nav_cols = st.columns(len(PAGES))
+    for i, p in enumerate(PAGES):
+        with nav_cols[i]:
+            if p == st.session_state.page:
+                st.markdown(f"<span class='nav-active'>{p}</span>", unsafe_allow_html=True)
+            else:
+                if st.button(p, key=f"nav_{p}", use_container_width=True):
+                    go_to(p)
+                    st.rerun()
+
+st.markdown("<div class='divider' style='margin-top:0.5rem;'></div>", unsafe_allow_html=True)
 
 # ----------------------------------------------------------------------------
 # HOME
 # ----------------------------------------------------------------------------
-with tabs[0]:
+if st.session_state.page == "Home":
     st.markdown(
-        """
+        f"""
         <div class="hero">
-            <div class="subhead">STRATEGIC CONSULTING</div>
-            <h1>Building Bridges Between Policy, Practice, and Human Experience</h1>
-            <p>Strategic consulting for organizations working to strengthen communities, improve systems,
-            and expand opportunity for immigrants and other underserved populations.</p>
+            <div class="hero-inner">
+                <div class="hero-text">
+                    <div class="subhead">STRATEGIC CONSULTING</div>
+                    <h1>Building Bridges Between Policy, Practice, and Human Experience</h1>
+                    <p>Strategic consulting for organizations working to strengthen communities, improve systems,
+                    and expand opportunity for immigrants and other underserved populations.</p>
+                </div>
+                <div class="hero-photo">
+                    <img src="{HERO_PHOTO_URI}" alt="Johannes Favi">
+                </div>
+            </div>
         </div>
         """,
         unsafe_allow_html=True,
@@ -209,10 +309,13 @@ with tabs[0]:
 
     col1, col2 = st.columns([1, 1])
     with col1:
-        if st.button("Schedule a Consultation", key="home_cta1"):
-            st.session_state["_scroll_contact"] = True
+        if st.button("Schedule a Consultation", key="home_cta1", use_container_width=True):
+            go_to("Contact")
+            st.rerun()
     with col2:
-        st.link_button("Explore Services", "#services")
+        if st.button("Explore Services", key="home_cta2", use_container_width=True):
+            go_to("Services")
+            st.rerun()
 
     st.markdown("<div class='divider'></div>", unsafe_allow_html=True)
 
@@ -258,12 +361,14 @@ with tabs[0]:
         """,
         unsafe_allow_html=True,
     )
-    st.link_button("Contact Me →", "#contact")
+    if st.button("Contact Me →", key="home_cta3"):
+        go_to("Contact")
+        st.rerun()
 
 # ----------------------------------------------------------------------------
 # ABOUT
 # ----------------------------------------------------------------------------
-with tabs[1]:
+elif st.session_state.page == "About":
     st.markdown("<div class='section-label'>About</div>", unsafe_allow_html=True)
     st.markdown("<div class='section-title'>Who I Work With</div>", unsafe_allow_html=True)
     st.write(
@@ -292,14 +397,16 @@ with tabs[1]:
     st.markdown("<div class='divider'></div>", unsafe_allow_html=True)
     col1, col2 = st.columns(2)
     with col1:
-        st.button("Discuss Your Project", key="about_cta1")
+        if st.button("Discuss Your Project", key="about_cta1", use_container_width=True):
+            go_to("Contact")
+            st.rerun()
     with col2:
         st.link_button("Book a Strategy Call", f"mailto:{CONTACT_EMAIL}?subject=Strategy%20Call%20Request")
 
 # ----------------------------------------------------------------------------
 # SERVICES
 # ----------------------------------------------------------------------------
-with tabs[2]:
+elif st.session_state.page == "Services":
     st.markdown("<div id='services'></div>", unsafe_allow_html=True)
     st.markdown("<div class='section-label'>What I Do</div>", unsafe_allow_html=True)
     st.markdown("<div class='section-title'>Services Overview</div>", unsafe_allow_html=True)
@@ -338,14 +445,16 @@ with tabs[2]:
     st.markdown("<div class='divider'></div>", unsafe_allow_html=True)
     col1, col2 = st.columns(2)
     with col1:
-        st.button("View All Services", key="services_cta1")
+        if st.button("Discuss Your Project", key="services_cta1", use_container_width=True):
+            go_to("Contact")
+            st.rerun()
     with col2:
         st.link_button("Request a Custom Engagement", f"mailto:{CONTACT_EMAIL}?subject=Custom%20Engagement%20Request")
 
 # ----------------------------------------------------------------------------
 # SPEAKING
 # ----------------------------------------------------------------------------
-with tabs[3]:
+elif st.session_state.page == "Speaking":
     st.markdown("<div class='section-label'>Speaking</div>", unsafe_allow_html=True)
     st.markdown("<div class='section-title'>Speaking & Training</div>", unsafe_allow_html=True)
     st.write(
@@ -363,7 +472,7 @@ with tabs[3]:
 # ----------------------------------------------------------------------------
 # ADVISORY
 # ----------------------------------------------------------------------------
-with tabs[4]:
+elif st.session_state.page == "Advisory":
     st.markdown("<div class='section-label'>Advisory</div>", unsafe_allow_html=True)
     st.markdown("<div class='section-title'>Advisory Support</div>", unsafe_allow_html=True)
     st.write(
@@ -382,7 +491,7 @@ with tabs[4]:
 # ----------------------------------------------------------------------------
 # CONTACT
 # ----------------------------------------------------------------------------
-with tabs[5]:
+elif st.session_state.page == "Contact":
     st.markdown("<div id='contact'></div>", unsafe_allow_html=True)
     st.markdown("<div class='section-label'>Get in Touch</div>", unsafe_allow_html=True)
     st.markdown("<div class='section-title'>Let's Talk About Your Project</div>", unsafe_allow_html=True)
