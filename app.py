@@ -47,6 +47,83 @@ ORG_LOGOS = [
     ("assets/logos/logo-healing-horizons.png", "Healing Horizons"),
 ]
 ORG_LOGO_URIS = [(_img_to_data_uri(path), alt) for path, alt in ORG_LOGOS]
+ORG_LOGO_URI_MAP = {alt: uri for uri, alt in ORG_LOGO_URIS}
+
+# Curated subset for the homepage strip (8 recognizable logos).
+HOME_FEATURED_LOGOS = [
+    "State of Illinois", "University of Chicago", "University of Illinois Chicago",
+    "DePaul University", "Bridge Communities", "National Immigrant Justice Center",
+    "Chicago Council on Global Affairs", "Detention Watch Network",
+]
+
+GOV_ORGS = [
+    "Office of the Governor of Illinois", "Illinois Department of Human Rights",
+    "Illinois Task Force on Black Immigrants", "Office of Congressman Jes\u00fas \u201cChuy\u201d Garc\u00eda",
+    "City of Chicago", "Cook County Government", "DuPage County Government",
+    "Illinois Housing Development Authority", "State of Illinois",
+]
+
+NONPROFIT_ORGS = [
+    "Bridge Communities", "Illinois Community for Displaced Immigrants",
+    "National Immigrant Justice Center", "Detention Watch Network",
+    "United African Organization", "Chicago Refugee Coalition", "ICIRR",
+    "New American Leaders", "Change Collective", "DuPage PADS", "RefugeeOne",
+    "The Resurrection Project", "Centro Romero", "Ascend Justice",
+    "Community Renewal Society", "Caged Dreams", "Chicago Council on Global Affairs",
+    "Healing Horizons",
+]
+
+HEALTHCARE_ORGS = [
+    "Ann & Robert H. Lurie Children's Hospital", "Rush", "CommunityHealth",
+    "Coalition for Immigrant Mental Health", "Behavioral Health Providers",
+]
+
+EMPLOYER_CATEGORIES = [
+    "Manufacturing", "Healthcare", "Hospitality", "Human Resources",
+    "Corporate Social Responsibility", "Small Businesses",
+]
+
+UNIVERSITY_ORGS = [
+    "University of Chicago", "University of Chicago Harris School of Public Policy",
+    "University of Illinois Chicago", "DePaul University", "Loyola University Chicago",
+    "Boston University", "Northeastern Illinois University", "UCLA",
+    "University of Tennessee",
+]
+
+FOUNDATION_ORGS = [
+    "Chicago Community Trust", "MacArthur Foundation", "Crossroads Fund",
+    "Walder Foundation", "Dignity for Families Fund", "Phalarope Foundation",
+    "Odyssey Impact",
+]
+
+FAITH_ORGS = [
+    "Catholic Lawyers Guild of Chicago", "Chicago Religious Leadership Network",
+    "Darst Center", "Archdiocese of Chicago", "Viator House of Hospitality",
+    "Su Casa Catholic Worker", "Holy Spirit Sisters", "Elmhurst Presbyterian Church",
+    "Wellington UCC", "Sanctuary Working Group",
+]
+
+
+def render_org_sector(label, description, org_names, gold_tags=False):
+    """Render a sector of organizations: real logos where available,
+    clean text tags for everything else."""
+    st.markdown(f"<div class='section-label'>{label}</div>", unsafe_allow_html=True)
+    st.write(description)
+    logo_orgs = [o for o in org_names if o in ORG_LOGO_URI_MAP]
+    text_orgs = [o for o in org_names if o not in ORG_LOGO_URI_MAP]
+    if logo_orgs:
+        logo_html = "".join(
+            f"<img src='{ORG_LOGO_URI_MAP[o]}' alt='{o}' title='{o}'>" for o in logo_orgs
+        )
+        st.markdown(f"<div class='logo-strip'>{logo_html}</div>", unsafe_allow_html=True)
+        st.write("")
+    if text_orgs:
+        tag_class = "tag-gold" if gold_tags else "tag"
+        st.markdown(
+            "".join(f"<span class='{tag_class}'>{o}</span>" for o in text_orgs),
+            unsafe_allow_html=True,
+        )
+    st.markdown("<div class='divider'></div>", unsafe_allow_html=True)
 
 # ----------------------------------------------------------------------------
 # GLOBAL STYLE
@@ -590,7 +667,7 @@ st.markdown(
 # ----------------------------------------------------------------------------
 # NAVIGATION
 # ----------------------------------------------------------------------------
-PAGES = ["Home", "About", "Services", "Speaking", "Advisory", "Media", "Impact", "Testimonials", "Contact"]
+PAGES = ["Home", "About", "Partners", "Services", "Speaking", "Advisory", "Media", "Impact", "Testimonials", "Contact"]
 if "page" not in st.session_state:
     st.session_state.page = "Home"
 
@@ -1041,11 +1118,23 @@ if st.session_state.page == "Home":
         unsafe_allow_html=True,
     )
 
-    # ---- Featured Organizations ----
-    logo_imgs_html = "".join(
-        f"<img src='{uri}' alt='{alt}' title='{alt}'>" for uri, alt in ORG_LOGO_URIS
+    # ---- Trusted by Organizations Across Sectors ----
+    st.markdown("<div class='section-label'>Trusted by Organizations Across Sectors</div>", unsafe_allow_html=True)
+    st.write(
+        "Johannes has collaborated with government agencies, universities, healthcare systems, "
+        "nonprofit organizations, foundations, employers, and faith communities to strengthen "
+        "public systems, expand opportunity, and improve outcomes for immigrant and underserved "
+        "communities."
     )
-    st.markdown(f"<div class='logo-strip'>{logo_imgs_html}</div>", unsafe_allow_html=True)
+    home_logo_html = "".join(
+        f"<img src='{ORG_LOGO_URI_MAP[name]}' alt='{name}' title='{name}'>"
+        for name in HOME_FEATURED_LOGOS
+    )
+    st.markdown(f"<div class='logo-strip'>{home_logo_html}</div>", unsafe_allow_html=True)
+    st.write("")
+    if st.button("View All Partners", key="home_view_partners"):
+        go_to("Partners")
+        st.rerun()
 
     st.markdown("<div class='divider'></div>", unsafe_allow_html=True)
 
@@ -1373,32 +1462,16 @@ elif st.session_state.page == "About":
 
     st.markdown("<div class='divider'></div>", unsafe_allow_html=True)
 
-    # ---- Collaborations ----
-    st.markdown("<div class='section-label'>Collaborations</div>", unsafe_allow_html=True)
-    st.markdown("<div class='section-title'>Selected Collaborations</div>", unsafe_allow_html=True)
+    # ---- Cross-Sector Leadership ----
+    st.markdown("<div class='section-label'>Cross-Sector Leadership</div>", unsafe_allow_html=True)
     st.write(
-        "Johannes has collaborated with government agencies, universities, nonprofits, foundations, "
-        "and community organizations to improve outcomes for immigrant and underserved communities."
+        "Johannes has built partnerships across government, higher education, healthcare, "
+        "nonprofit organizations, philanthropy, employers, and faith communities to strengthen "
+        "public systems and improve community outcomes."
     )
-    collaborations = [
-        "Bridge Communities", "Illinois Community for Displaced Immigrants",
-        "Interfaith Community for Detained Immigrants", "Detention Watch Network",
-        "National Immigrant Justice Center", "Illinois Coalition for Immigrant and Refugee Rights",
-        "Midwest Immigration Bond Fund", "Simmons Center for Global Chicago",
-        "University of Chicago", "University of Illinois Chicago", "DePaul University",
-        "Lewis University", "Santa Clara University", "Loyola School of New York",
-        "Chicago Religious Leadership Network", "Chicago Refugee Coalition", "6000 Moms",
-        "Progressives for Change", "Elmhurst Rotary Club", "Darst Center", "Save the Children",
-    ]
-    st.markdown(
-        "".join(f"<span class='tag'>{c}</span>" for c in collaborations),
-        unsafe_allow_html=True,
-    )
-    st.write("")
-    logo_imgs_html_about = "".join(
-        f"<img src='{uri}' alt='{alt}' title='{alt}'>" for uri, alt in ORG_LOGO_URIS
-    )
-    st.markdown(f"<div class='logo-strip'>{logo_imgs_html_about}</div>", unsafe_allow_html=True)
+    if st.button("Explore Partners", key="about_explore_partners"):
+        go_to("Partners")
+        st.rerun()
 
     st.markdown("<div class='divider'></div>", unsafe_allow_html=True)
 
@@ -1449,6 +1522,85 @@ elif st.session_state.page == "About":
             st.rerun()
     with col2:
         st.link_button("Book a Strategy Call", f"mailto:{CONTACT_EMAIL}?subject=Strategy%20Call%20Request")
+
+# ----------------------------------------------------------------------------
+# PARTNERS
+# ----------------------------------------------------------------------------
+elif st.session_state.page == "Partners":
+    st.markdown("<div class='section-label'>Organizations & Institutions</div>", unsafe_allow_html=True)
+    st.markdown("<div class='section-title'>Working Across Sectors</div>", unsafe_allow_html=True)
+    st.write(
+        "Johannes partners with organizations across government, higher education, healthcare, "
+        "philanthropy, nonprofit leadership, and community development to design practical "
+        "solutions that strengthen organizations and improve outcomes."
+    )
+    st.write(
+        "His collaborative approach brings together diverse stakeholders to address complex "
+        "challenges through strategy, policy, research, leadership, and community engagement."
+    )
+    st.caption(
+        "The organizations below represent selected institutions with which Johannes has "
+        "collaborated through leadership roles, advisory work, public policy initiatives, "
+        "speaking engagements, research, coalition-building, or community partnerships. "
+        "Inclusion does not imply endorsement or an ongoing formal partnership."
+    )
+
+    st.markdown("<div class='divider'></div>", unsafe_allow_html=True)
+
+    render_org_sector(
+        "Government",
+        "Collaborating with government leaders to strengthen public policy, improve service "
+        "delivery, and expand opportunity for immigrant and underserved communities.",
+        GOV_ORGS,
+    )
+    render_org_sector(
+        "Nonprofits",
+        "Partnering with nonprofit organizations to strengthen leadership, develop programs, "
+        "improve organizational strategy, and build more equitable systems.",
+        NONPROFIT_ORGS,
+    )
+    render_org_sector(
+        "Healthcare",
+        "Supporting healthcare providers working to improve access, integration, mental health, "
+        "and community well-being.",
+        HEALTHCARE_ORGS,
+    )
+
+    st.markdown("<div class='section-label'>Employers</div>", unsafe_allow_html=True)
+    st.write(
+        "Helping employers attract, retain, and successfully integrate international talent "
+        "while building inclusive workplaces."
+    )
+    st.markdown(
+        "".join(f"<span class='tag-gold'>{c}</span>" for c in EMPLOYER_CATEGORIES),
+        unsafe_allow_html=True,
+    )
+    st.markdown("<div class='divider'></div>", unsafe_allow_html=True)
+
+    render_org_sector(
+        "Universities",
+        "Collaborating with universities through public lectures, research partnerships, policy "
+        "discussions, documentary screenings, and leadership development.",
+        UNIVERSITY_ORGS,
+    )
+    render_org_sector(
+        "Foundations",
+        "Supporting philanthropic organizations seeking practical strategies to strengthen "
+        "communities and expand opportunity.",
+        FOUNDATION_ORGS,
+    )
+    render_org_sector(
+        "Faith Communities",
+        "Faith communities have played an important role throughout Johannes' career, serving as "
+        "trusted partners in welcoming immigrants, advancing human dignity, and building stronger "
+        "communities.",
+        FAITH_ORGS,
+    )
+
+    st.write("**Interested in working together? Schedule a consultation.**")
+    if st.button("Schedule a Consultation", key="partners_cta1"):
+        go_to("Contact")
+        st.rerun()
 
 # ----------------------------------------------------------------------------
 # SERVICES
@@ -1532,6 +1684,17 @@ elif st.session_state.page == "Services":
     st.link_button("Read State Report", TASK_FORCE_REPORT_URL)
 
     st.markdown("<div class='divider'></div>", unsafe_allow_html=True)
+
+    st.markdown("<div class='section-label'>Who I Work With</div>", unsafe_allow_html=True)
+    who_categories = ["Government", "Universities", "Healthcare", "Foundations", "Nonprofits", "Employers"]
+    who_cols = st.columns(3)
+    for i, category in enumerate(who_categories):
+        with who_cols[i % 3]:
+            if st.button(category, key=f"who_{category}", use_container_width=True):
+                go_to("Partners")
+                st.rerun()
+
+    st.markdown("<div class='divider'></div>", unsafe_allow_html=True)
     st.write("**Need strategic guidance? Book a discovery call.**")
     col1, col2 = st.columns(2)
     with col1:
@@ -1596,6 +1759,19 @@ elif st.session_state.page == "Speaking":
     )
 
     st.markdown("<div class='divider'></div>", unsafe_allow_html=True)
+
+    st.write("**Trusted By**")
+    trusted_by_names = [
+        "State of Illinois", "University of Chicago",
+        "University of Chicago Harris School of Public Policy",
+        "University of Illinois Chicago", "DePaul University",
+    ]
+    trusted_by_html = "".join(
+        f"<img src='{ORG_LOGO_URI_MAP[name]}' alt='{name}' title='{name}'>" for name in trusted_by_names
+    )
+    st.markdown(f"<div class='logo-strip'>{trusted_by_html}</div>", unsafe_allow_html=True)
+
+    st.markdown("<div class='divider'></div>", unsafe_allow_html=True)
     st.write("**Planning a conference or leadership retreat? Let's talk.**")
     st.link_button("Inquire About Speaking", f"mailto:{CONTACT_EMAIL}?subject=Speaking%20Inquiry")
 
@@ -1636,6 +1812,13 @@ elif st.session_state.page == "Media":
         "".join(f"<span class='tag'>{o}</span>" for o in AS_FEATURED_IN),
         unsafe_allow_html=True,
     )
+    st.write("")
+    st.write("**Institutional Recognition**")
+    media_logo_names = ["University of Chicago", "University of Illinois Chicago", "DePaul University", "State of Illinois"]
+    media_logo_html = "".join(
+        f"<img src='{ORG_LOGO_URI_MAP[name]}' alt='{name}' title='{name}'>" for name in media_logo_names
+    )
+    st.markdown(f"<div class='logo-strip'>{media_logo_html}</div>", unsafe_allow_html=True)
     st.write("")
 
     st.markdown(
@@ -1952,18 +2135,25 @@ elif st.session_state.page == "Impact":
         "built partnerships connecting nonprofits, universities, government agencies, healthcare "
         "organizations, foundations, faith communities, and grassroots leaders around shared goals."
     )
-    st.write(
-        "His collaborative work has included organizations such as Bridge Communities, the Illinois "
-        "Community for Displaced Immigrants, Interfaith Community for Detained Immigrants, the "
-        "National Immigrant Justice Center, Detention Watch Network, ICIRR, the University of "
-        "Chicago, the University of Illinois Chicago, DePaul University, and numerous community-based "
-        "organizations."
+    st.markdown(
+        "<div class='checklist'>"
+        + "".join(
+            f"<span class='checklist-item'><span class='check'>&#10003;</span>{a}</span>"
+            for a in ["Government", "Universities", "Healthcare", "Foundations",
+                      "Faith Communities", "Employers", "Community Organizations"]
+        )
+        + "</div>",
+        unsafe_allow_html=True,
     )
     st.write(
         "By bringing together diverse perspectives and building trust across institutions, Johannes "
         "helps organizations move beyond isolated initiatives toward coordinated, sustainable "
         "solutions that create lasting community impact."
     )
+    st.write("")
+    if st.button("View Partner Network", key="impact_view_partners"):
+        go_to("Partners")
+        st.rerun()
 
     st.markdown("<div class='divider'></div>", unsafe_allow_html=True)
 
@@ -2159,6 +2349,12 @@ elif st.session_state.page == "Contact":
 # FOOTER
 # ----------------------------------------------------------------------------
 st.markdown("<div class='divider'></div>", unsafe_allow_html=True)
+st.markdown(
+    "<div style='text-align:center;color:#9aa0a8;font-size:0.82rem;padding-bottom:0.6rem;max-width:640px;margin:0 auto;'>"
+    "Working with organizations across government, higher education, healthcare, nonprofit "
+    "leadership, philanthropy, employers, and community organizations.</div>",
+    unsafe_allow_html=True,
+)
 st.markdown(
     f"<div style='text-align:center;color:#9aa0a8;font-size:0.85rem;padding-bottom:1rem;'>"
     f"© 2026 Johannes Favi &nbsp;·&nbsp; Strategic Consulting &nbsp;·&nbsp; "
