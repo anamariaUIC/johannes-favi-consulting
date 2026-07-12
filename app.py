@@ -31,6 +31,7 @@ def _img_to_data_uri(path: str) -> str:
 
 
 HERO_PHOTO_URI = _img_to_data_uri("assets/johannes-favi-hero.jpg")
+CAGED_DREAMS_FLYER_URI = _img_to_data_uri("assets/caged-dreams-flyer.jpg")
 
 ORG_LOGOS = [
     ("assets/logos/logo-bridge-communities.png", "Bridge Communities"),
@@ -387,6 +388,23 @@ st.markdown(
             padding: 2.4rem 2.6rem;
             color: #ffffff;
         }
+        .featured-project-inner {
+            display: flex;
+            align-items: center;
+            gap: 2.2rem;
+        }
+        .fp-text { flex: 1.3; min-width: 0; }
+        .fp-photo {
+            flex: 1;
+            display: flex;
+            justify-content: flex-end;
+        }
+        .fp-photo img {
+            width: 100%;
+            max-width: 220px;
+            border-radius: 10px;
+            box-shadow: 0 14px 32px rgba(0,0,0,0.35);
+        }
         .featured-project .section-label { color: var(--gold); }
         .featured-project h2 { color: #ffffff; margin-bottom: 0.7rem; }
         .featured-project .quote {
@@ -684,6 +702,17 @@ st.markdown(
             }
             .featured-project {
                 padding: 1.6rem 1.4rem;
+            }
+            .featured-project-inner {
+                flex-direction: column;
+                gap: 1.3rem;
+            }
+            .fp-photo {
+                justify-content: center;
+                order: -1;
+            }
+            .fp-photo img {
+                max-width: 160px;
             }
             .cta-strip {
                 padding: 1.5rem 1.25rem;
@@ -1251,36 +1280,26 @@ if st.session_state.page == "Home":
     st.markdown("<div class='divider'></div>", unsafe_allow_html=True)
 
     # ---- Featured Project: Caged Dreams ----
-    fp_img_col1, fp_img_col2, fp_img_col3 = st.columns([1, 1.1, 1])
-    with fp_img_col2:
-        st.markdown(
-            """
-            <style>
-                .st-key-home_flyer_wrap img {
-                    border-radius: 10px;
-                    box-shadow: 0 14px 32px rgba(16, 35, 63, 0.28);
-                }
-            </style>
-            """,
-            unsafe_allow_html=True,
-        )
-        with st.container(key="home_flyer_wrap"):
-            st.image("assets/caged-dreams-flyer.jpg", use_container_width=True)
-
-    st.write("")
     st.markdown(
-        """
+        f"""
         <div class="featured-project">
-            <div class="section-label">Featured Initiative</div>
-            <h2>Caged Dreams</h2>
-            <div class="quote">Transforming lived experience into policy change, education, and healing.</div>
-            <p>Caged Dreams began as an award-recognized documentary exploring the mental health
-            consequences of immigration detention. Today it has grown into a broader initiative dedicated
-            to supporting newly arrived immigrants through mental health advocacy, education, storytelling,
-            and community partnerships.</p>
-            <p>The documentary has been screened at universities, community organizations, and public forums
-            across the United States, creating dialogue about immigration detention, trauma, resilience,
-            and systems change.</p>
+            <div class="featured-project-inner">
+                <div class="fp-text">
+                    <div class="section-label">Featured Initiative</div>
+                    <h2>Caged Dreams</h2>
+                    <div class="quote">Transforming lived experience into policy change, education, and healing.</div>
+                    <p>Caged Dreams began as an award-recognized documentary exploring the mental health
+                    consequences of immigration detention. Today it has grown into a broader initiative dedicated
+                    to supporting newly arrived immigrants through mental health advocacy, education, storytelling,
+                    and community partnerships.</p>
+                    <p>The documentary has been screened at universities, community organizations, and public forums
+                    across the United States, creating dialogue about immigration detention, trauma, resilience,
+                    and systems change.</p>
+                </div>
+                <div class="fp-photo">
+                    <img src="{CAGED_DREAMS_FLYER_URI}" alt="Caged Dreams poster">
+                </div>
+            </div>
         </div>
         """,
         unsafe_allow_html=True,
