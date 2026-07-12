@@ -456,12 +456,29 @@ elif st.session_state.page == "About":
 
     st.markdown("<div class='divider'></div>", unsafe_allow_html=True)
 
+    st.markdown(
+        """
+        <style>
+            .st-key-family_photos img {
+                border-radius: 8px;
+                display: block;
+            }
+            .st-key-family_photos [data-testid="stHorizontalBlock"] {
+                gap: 0.6rem;
+            }
+        </style>
+        """,
+        unsafe_allow_html=True,
+    )
     st.markdown("<div class='section-label'>Beyond the Work</div>", unsafe_allow_html=True)
-    pcol1, pcol2 = st.columns(2)
-    with pcol1:
-        st.image("assets/johannes-favi-family.jpg", use_container_width=True)
-    with pcol2:
-        st.image("assets/johannes-favi-family2.jpg", use_container_width=True)
+    with st.container(key="family_photos"):
+        pcol1, pcol2, pcol3 = st.columns(3, gap="small")
+        with pcol1:
+            st.image("assets/johannes-favi-family.jpg", use_container_width=True)
+        with pcol2:
+            st.image("assets/johannes-favi-family2.jpg", use_container_width=True)
+        with pcol3:
+            st.image("assets/johannes-favi-family3.jpg", use_container_width=True)
     st.write(
         "Johannes is a proud father of three. He enjoys outdoor activities, traveling, and "
         "exploring cultures around the world with his partner and kids. He is also a passionate "
