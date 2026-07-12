@@ -1488,20 +1488,23 @@ elif st.session_state.page == "Services":
             .st-key-services_photo img {
                 border-radius: 10px;
             }
+            .st-key-services_photo {
+                margin-bottom: 1rem;
+            }
         </style>
         """,
         unsafe_allow_html=True,
     )
     cols = st.columns(2)
+    with cols[1]:
+        with st.container(key="services_photo"):
+            st.image("assets/johannes-favi-services.jpg", use_container_width=True)
     for i, (title, desc) in enumerate(services):
         with cols[i % 2]:
             st.markdown(
                 f"<div class='card'><h4>{title}</h4><p>{desc}</p></div>",
                 unsafe_allow_html=True,
             )
-    with cols[1]:
-        with st.container(key="services_photo"):
-            st.image("assets/johannes-favi-services.jpg", use_container_width=True)
 
     st.markdown("<div class='divider'></div>", unsafe_allow_html=True)
 
