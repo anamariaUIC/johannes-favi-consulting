@@ -14,6 +14,11 @@ st.set_page_config(
 
 CONTACT_EMAIL = "contactcageddreams@gmail.com"
 
+# TODO: replace these placeholders with the real Caged Dreams links once available.
+CAGED_DREAMS_URL = "#"
+CAGED_DREAMS_TRAILER_URL = "#"
+DISCUSSION_GUIDE_URL = "#"
+
 
 def _img_to_data_uri(path: str) -> str:
     """Read a local image file and return it as a base64 data URI,
@@ -73,7 +78,7 @@ st.markdown(
             padding: 3rem 3rem;
             border-radius: 14px;
             color: #ffffff;
-            margin-bottom: 2.5rem;
+            margin-bottom: 2rem;
         }
         .hero-inner {
             display: flex;
@@ -97,21 +102,35 @@ st.markdown(
         }
         .hero h1 {
             color: #ffffff;
-            font-size: 2.6rem;
+            font-size: 2.5rem;
             line-height: 1.25;
             margin-bottom: 0.8rem;
         }
         .hero .subhead {
-            font-size: 1.15rem;
+            font-size: 1.1rem;
             color: var(--gold);
             font-weight: 500;
             margin-bottom: 1.2rem;
         }
         .hero p {
-            font-size: 1.02rem;
+            font-size: 1.0rem;
             color: #e6e9ef;
             max-width: 720px;
             line-height: 1.7;
+        }
+
+        /* Credibility strip */
+        .credibility-wrap {
+            text-align: center;
+            padding: 0.5rem 0 1.8rem 0;
+        }
+        .credibility-label {
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--gray);
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 0.9rem;
         }
 
         /* Section headers */
@@ -157,6 +176,71 @@ st.markdown(
             color: var(--navy);
             padding: 0.5rem 0;
             border-bottom: 1px solid #eee;
+        }
+
+        /* Stat / impact cards */
+        .stat-card {
+            background: var(--off-white);
+            border: 1px solid #eae6dd;
+            border-radius: 10px;
+            padding: 1.3rem 0.8rem;
+            text-align: center;
+            height: 100%;
+        }
+        .stat-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.1rem;
+            font-weight: 700;
+            color: var(--gold);
+            line-height: 1.1;
+        }
+        .stat-label {
+            font-size: 0.82rem;
+            color: var(--navy);
+            margin-top: 0.3rem;
+        }
+
+        /* Featured project box */
+        .featured-project {
+            background: var(--navy);
+            border-radius: 14px;
+            padding: 2.4rem 2.6rem;
+            color: #ffffff;
+        }
+        .featured-project .section-label { color: var(--gold); }
+        .featured-project h2 { color: #ffffff; margin-bottom: 0.7rem; }
+        .featured-project .quote {
+            font-style: italic;
+            color: var(--gold);
+            font-size: 1.05rem;
+            margin-bottom: 1rem;
+        }
+        .featured-project p {
+            color: #d7dce5;
+            line-height: 1.7;
+            font-size: 0.98rem;
+        }
+
+        /* Media banner */
+        .media-banner {
+            background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 100%);
+            border-radius: 14px;
+            padding: 2.6rem;
+            text-align: center;
+            color: #ffffff;
+            margin-bottom: 2rem;
+        }
+        .media-banner h1 { color: #ffffff; margin-bottom: 0.4rem; }
+        .media-banner p { color: var(--gold); font-size: 1.05rem; margin: 0; }
+
+        .placeholder-card {
+            background: #f7f5f0;
+            border: 1px dashed #d8d0bd;
+            border-radius: 10px;
+            padding: 1.3rem 1.4rem;
+            color: var(--gray);
+            font-size: 0.92rem;
+            margin-bottom: 0.8rem;
         }
 
         .cta-strip {
@@ -213,6 +297,17 @@ st.markdown(
             margin: 0.2rem 0.3rem 0.2rem 0;
         }
 
+        .tag-gold {
+            display: inline-block;
+            background: rgba(184, 146, 74, 0.18);
+            color: var(--gold);
+            padding: 0.35rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin: 0.2rem 0.3rem 0.2rem 0;
+        }
+
         .contact-form-wrap iframe {
             border: none;
         }
@@ -254,6 +349,12 @@ st.markdown(
             .card {
                 padding: 1.1rem 1.2rem;
             }
+            .featured-project {
+                padding: 1.6rem 1.4rem;
+            }
+            .media-banner {
+                padding: 1.8rem 1.3rem;
+            }
             .cta-strip {
                 padding: 1.5rem 1.25rem;
             }
@@ -263,9 +364,12 @@ st.markdown(
             .cta-strip p {
                 font-size: 0.9rem;
             }
-            .tag {
+            .tag, .tag-gold {
                 font-size: 0.78rem;
                 padding: 0.3rem 0.65rem;
+            }
+            .stat-number {
+                font-size: 1.6rem;
             }
         }
 
@@ -285,7 +389,7 @@ st.markdown(
 # ----------------------------------------------------------------------------
 # NAVIGATION
 # ----------------------------------------------------------------------------
-PAGES = ["Home", "About", "Services", "Speaking", "Advisory", "Contact"]
+PAGES = ["Home", "About", "Services", "Speaking", "Advisory", "Media", "Resources", "Testimonials", "Contact"]
 if "page" not in st.session_state:
     st.session_state.page = "Home"
 
@@ -349,6 +453,16 @@ st.markdown(
         }
         .linkedin-link:hover { background: #1c3a63; }
 
+        .st-key-nav_bar div[data-testid="stHorizontalBlock"] {
+            flex-wrap: wrap !important;
+            gap: 0.15rem 0.5rem !important;
+        }
+        .st-key-nav_bar div[data-testid="column"] {
+            width: auto !important;
+            flex: 0 0 auto !important;
+            min-width: 0 !important;
+        }
+
         @media (max-width: 768px) {
             .header-row {
                 flex-direction: column;
@@ -361,15 +475,6 @@ st.markdown(
             .linkedin-link {
                 font-size: 0.8rem;
                 padding: 0.4rem 0.9rem;
-            }
-            .st-key-nav_bar div[data-testid="stHorizontalBlock"] {
-                flex-wrap: wrap !important;
-                gap: 0.2rem 0.6rem !important;
-            }
-            .st-key-nav_bar div[data-testid="column"] {
-                width: auto !important;
-                flex: 0 0 auto !important;
-                min-width: 0 !important;
             }
             .st-key-nav_bar button,
             .nav-active {
@@ -407,6 +512,26 @@ with st.container(key="nav_bar"):
 st.markdown("<div class='divider' style='margin-top:0.5rem;'></div>", unsafe_allow_html=True)
 
 # ----------------------------------------------------------------------------
+# SHARED DATA
+# ----------------------------------------------------------------------------
+RECOGNITION = [
+    ("Jeanne & Joseph Sullivan Human Rights Award", "Awarded for leadership advancing immigrant rights and human dignity."),
+    ("Special Service Award, Catholic Lawyers Guild of Chicago", "Recognizing outstanding service to immigrant communities."),
+    ("Chicago City Council Recognition", "Recognized during National Hispanic Heritage Month by Alderman Andre Vasquez."),
+    ("Freedom Fellow, Detention Watch Network", "National leadership fellowship advancing alternatives to immigration detention."),
+    ("Chicago Council Emerging Leader", "Civic Leadership Academy, University of Chicago Harris School of Public Policy."),
+]
+
+SCREENINGS = ["University of Chicago", "UIC", "DePaul", "Princeton", "Boston University", "Maine Film Center"]
+
+TESTIMONIAL_CATEGORIES = [
+    ("Government", 2),
+    ("Nonprofit", 2),
+    ("Academic", 2),
+    ("Speaking Engagements", 1),
+]
+
+# ----------------------------------------------------------------------------
 # HOME
 # ----------------------------------------------------------------------------
 if st.session_state.page == "Home":
@@ -417,8 +542,9 @@ if st.session_state.page == "Home":
                 <div class="hero-text">
                     <div class="subhead">STRATEGIC CONSULTING</div>
                     <h1>Building Bridges Between Policy, Practice, and Human Experience</h1>
-                    <p>Strategic consulting for organizations working to strengthen communities, improve systems,
-                    and expand opportunity for immigrants and other underserved populations.</p>
+                    <p>Strategic consulting for governments, nonprofits, universities, healthcare systems,
+                    foundations, and mission-driven organizations seeking practical, human-centered solutions
+                    in immigration, housing, workforce development, organizational leadership, and public policy.</p>
                 </div>
                 <div class="hero-photo">
                     <img src="{HERO_PHOTO_URI}" alt="Johannes Favi">
@@ -439,45 +565,138 @@ if st.session_state.page == "Home":
             go_to("Services")
             st.rerun()
 
-    st.markdown("<div class='divider'></div>", unsafe_allow_html=True)
-
-    st.markdown("<div class='section-label'>Introduction</div>", unsafe_allow_html=True)
-    st.markdown("<div class='section-title'>A Practical, People-Centered Approach</div>", unsafe_allow_html=True)
-    st.write(
-        "I help governments, nonprofits, universities, healthcare systems, and businesses create "
-        "practical, people-centered solutions that lead to measurable impact. With more than 17 years "
-        "of executive leadership experience, I bring expertise in immigration, housing, workforce "
-        "development, nonprofit strategy, community engagement, and policy implementation."
-    )
-    st.write(
-        "I combine executive leadership, policy expertise, research, and lived experience to help "
-        "organizations turn complex challenges into clear, actionable strategies. My approach is "
-        "collaborative, practical, and grounded in the belief that systems can be more effective, "
-        "more compassionate, and more equitable."
+    # ---- Credibility strip ----
+    st.markdown(
+        "<div class='credibility-wrap'>"
+        "<div class='credibility-label'>Trusted By Communities. Recognized By Institutions.</div>"
+        "<span class='tag'>Founder & CEO, Caged Dreams</span>"
+        "<span class='tag'>Director of Program Housing, Bridge Communities</span>"
+        "<span class='tag'>Former Deputy Director, Illinois Community for Displaced Immigrants</span>"
+        "<span class='tag'>Board Member, Interfaith Community for Detained Immigrants</span>"
+        "<span class='tag'>Graduate, Civic Leadership Academy (University of Chicago)</span>"
+        "<span class='tag'>Freedom Fellow, Detention Watch Network</span>"
+        "</div>",
+        unsafe_allow_html=True,
     )
 
     st.markdown("<div class='divider'></div>", unsafe_allow_html=True)
 
-    st.markdown("<div class='section-label'>Why Work With Me</div>", unsafe_allow_html=True)
-    st.markdown("<div class='section-title'>From Complexity to Clarity</div>", unsafe_allow_html=True)
-    st.write(
-        "I bring a human-centered and highly practical approach to every engagement. Clients work "
-        "with me when they need a trusted thought partner, an experienced facilitator, or a strategic "
-        "advisor who can help move from complexity to clarity and from ideas to implementation."
-    )
-    points = [
-        ("17+ years of executive leadership experience", "https://www.linkedin.com/in/johannesfavi/"),
-        ("Expertise across policy, systems, and organizational strategy", None),
-        (
-            "Strong background in research, planning, and implementation",
-            "https://www.ilga.gov/Documents/Reports/ReportsSubmitted/6390RSGAEmail14131RSGAAttachReport%20of%20the%20Task%20Force%20on%20Black%20Immigrants_12-29-2025.pdf",
+    # ---- Featured Expertise ----
+    st.markdown("<div class='section-label'>Featured Expertise</div>", unsafe_allow_html=True)
+    st.markdown("<div class='section-title'>Where I Add the Most Value</div>", unsafe_allow_html=True)
+    st.markdown(
+        "".join(
+            f"<span class='tag'>{a}</span>"
+            for a in [
+                "Immigration policy & systems", "Housing & homelessness",
+                "Workforce development", "Nonprofit strategy & leadership",
+                "Public policy & government relations",
+            ]
         ),
-        ("Deep commitment to equity, access, and community impact", None),
-    ]
-    for text, url in points:
-        label = f"<a href='{url}' target='_blank' style='color:inherit;text-decoration:underline;text-decoration-color:#c9a86a;'>{text}</a>" if url else text
-        st.markdown(f"<div class='stat-line'>&#9670;&nbsp;&nbsp;{label}</div>", unsafe_allow_html=True)
+        unsafe_allow_html=True,
+    )
+    st.write("")
+    if st.button("See All Services", key="home_see_services"):
+        go_to("Services")
+        st.rerun()
 
+    st.markdown("<div class='divider'></div>", unsafe_allow_html=True)
+
+    # ---- Impact by the Numbers ----
+    st.markdown("<div class='section-label'>Impact</div>", unsafe_allow_html=True)
+    st.markdown("<div class='section-title'>Selected Impact</div>", unsafe_allow_html=True)
+    stats = [
+        ("17+", "Years of Leadership"),
+        ("25+", "Speaking Engagements"),
+        ("10+", "Universities"),
+        ("6+", "Awards & Fellowships"),
+        ("5+", "National Media Features"),
+        ("1", "Nationally Screened Documentary"),
+    ]
+    stat_cols = st.columns(3)
+    for i, (number, label) in enumerate(stats):
+        with stat_cols[i % 3]:
+            st.markdown(
+                f"<div class='stat-card'><div class='stat-number'>{number}</div>"
+                f"<div class='stat-label'>{label}</div></div>",
+                unsafe_allow_html=True,
+            )
+
+    st.markdown("<div class='divider'></div>", unsafe_allow_html=True)
+
+    # ---- Featured Project: Caged Dreams ----
+    st.markdown(
+        """
+        <div class="featured-project">
+            <div class="section-label">Featured Initiative</div>
+            <h2>Caged Dreams</h2>
+            <div class="quote">Transforming lived experience into policy change, education, and healing.</div>
+            <p>Caged Dreams began as an award-recognized documentary exploring the mental health
+            consequences of immigration detention. Today it has grown into a broader initiative dedicated
+            to supporting newly arrived immigrants through mental health advocacy, education, storytelling,
+            and community partnerships.</p>
+            <p>The documentary has been screened at universities, community organizations, and public forums
+            across the United States, creating dialogue about immigration detention, trauma, resilience,
+            and systems change.</p>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+    st.write("")
+    fp_col1, fp_col2, fp_col3 = st.columns(3)
+    with fp_col1:
+        st.link_button("Visit Caged Dreams", CAGED_DREAMS_URL, use_container_width=True)
+    with fp_col2:
+        st.link_button("Watch Trailer", CAGED_DREAMS_TRAILER_URL, use_container_width=True)
+    with fp_col3:
+        if st.button("Learn More", key="home_learn_more", use_container_width=True):
+            go_to("Media")
+            st.rerun()
+
+    st.markdown("<div class='divider'></div>", unsafe_allow_html=True)
+
+    # ---- Recognition ----
+    st.markdown("<div class='section-label'>Recognition</div>", unsafe_allow_html=True)
+    st.markdown("<div class='section-title'>Selected Recognition</div>", unsafe_allow_html=True)
+    st.markdown(
+        "".join(f"<span class='tag-gold'>{title}</span>" for title, _ in RECOGNITION),
+        unsafe_allow_html=True,
+    )
+
+    st.markdown("<div class='divider'></div>", unsafe_allow_html=True)
+
+    # ---- Speaking preview ----
+    st.markdown("<div class='section-label'>Speaking</div>", unsafe_allow_html=True)
+    st.markdown("<div class='section-title'>Featured Speaking</div>", unsafe_allow_html=True)
+    st.markdown(
+        "".join(f"<span class='tag'>{s}</span>" for s in [
+            "University of Chicago", "University of Illinois Chicago", "DePaul University",
+            "African Studies Association", "Illinois Black Immigrant Task Force", "Congressional Testimony",
+        ]),
+        unsafe_allow_html=True,
+    )
+    st.write("")
+    if st.button("See Speaking", key="home_see_speaking"):
+        go_to("Speaking")
+        st.rerun()
+
+    st.markdown("<div class='divider'></div>", unsafe_allow_html=True)
+
+    # ---- Testimonials preview ----
+    st.markdown("<div class='section-label'>Testimonials</div>", unsafe_allow_html=True)
+    st.markdown("<div class='section-title'>What Collaborators Say</div>", unsafe_allow_html=True)
+    t_cols = st.columns(3)
+    for i in range(3):
+        with t_cols[i]:
+            st.markdown(
+                f"<div class='placeholder-card'>Testimonial {i + 1}<br><em>Coming soon</em></div>",
+                unsafe_allow_html=True,
+            )
+    if st.button("See All Testimonials", key="home_see_testimonials"):
+        go_to("Testimonials")
+        st.rerun()
+
+    # ---- Final CTA ----
     st.markdown(
         """
         <div class="cta-strip">
@@ -497,66 +716,108 @@ if st.session_state.page == "Home":
 # ----------------------------------------------------------------------------
 elif st.session_state.page == "About":
     st.markdown("<div class='section-label'>About</div>", unsafe_allow_html=True)
-    st.markdown("<div class='section-title'>Who I Work With</div>", unsafe_allow_html=True)
+    st.markdown("<div class='section-title'>Executive Biography</div>", unsafe_allow_html=True)
     st.write(
-        "I partner with foundations, nonprofits, universities, healthcare systems, government "
-        "agencies, employers, philanthropic institutions, and cross-sector teams committed to "
-        "strengthening communities and improving outcomes."
+        "Johannes Favi is a strategic consultant, nonprofit executive, human rights advocate, and "
+        "community leader dedicated to building stronger systems that expand opportunity for "
+        "underserved communities."
+    )
+    st.write(
+        "His work spans immigration, housing, workforce development, nonprofit leadership, "
+        "organizational strategy, public policy, and community engagement."
+    )
+    st.write(
+        "Johannes previously served as Deputy Director of the Illinois Community for Displaced "
+        "Immigrants (ICDI), where he led strategic planning, fundraising, organizational development, "
+        "and statewide advocacy initiatives. He played an important role in campaigns supporting "
+        "immigrant rights, including advocacy efforts surrounding the Illinois Way Forward Act, "
+        "legislation that ended local government contracts for immigrant detention in Illinois."
+    )
+    st.write(
+        "Today he serves as Director of Program Housing at Bridge Communities, where he continues "
+        "advancing housing stability and long-term solutions for vulnerable populations."
+    )
+    st.write(
+        "As founder of Caged Dreams, Johannes combines storytelling, research, policy, and community "
+        "engagement to improve mental health access and strengthen support systems for immigrant "
+        "communities."
     )
 
     st.markdown("<div class='divider'></div>", unsafe_allow_html=True)
 
-    st.markdown("<div class='section-label'>Career Highlights</div>", unsafe_allow_html=True)
-    st.markdown("<div class='section-title'>Selected Experience</div>", unsafe_allow_html=True)
-    highlights = [
-        ("Director of Program Housing", "Bridge Communities", "Oct 2025 - Present", None),
-        ("Advisor, Immigrant, Migrant & Refugee Rights", "Chicago Mayor's Office", "May 2024 - Present", None),
-        (
-            "Appointed Member, Black Immigrants Task Force",
-            "Office of the Governor of Illinois",
-            "Jan 2025 - Dec 2025",
-            "https://www.ilga.gov/Documents/Reports/ReportsSubmitted/6390RSGAEmail14131RSGAAttachReport%20of%20the%20Task%20Force%20on%20Black%20Immigrants_12-29-2025.pdf",
-        ),
-        ("Deputy Director & Board Member", "Illinois Community for Displaced Immigrants (ICDI)", "May 2020 - Apr 2025", None),
-        ("Emerging Leaders Fellow", "Chicago Council on Global Affairs", "Dec 2024 - Nov 2025", None),
-        ("Inaugural Freedom Fellow", "Detention Watch Network", "Oct 2023 - Sep 2024", None),
-        ("Immigration Advisory Council Member", "Cook County State's Attorney's Office", "Jan 2024 - Dec 2024", None),
+    # ---- Leadership ----
+    st.markdown("<div class='section-label'>Leadership</div>", unsafe_allow_html=True)
+    st.markdown("<div class='section-title'>Current & Previous Roles</div>", unsafe_allow_html=True)
+
+    st.markdown("<h4 style='color:#10233f;margin-bottom:0.6rem;'>Current</h4>", unsafe_allow_html=True)
+    current_roles = [
+        ("Founder & CEO", "Caged Dreams"),
+        ("Director of Program Housing", "Bridge Communities"),
+        ("Board Member", "Interfaith Community for Detained Immigrants"),
+        ("Member", "Chicago New Arrivals Cabinet"),
     ]
-    for role, org, dates, link in highlights:
-        title_html = (
-            f"<a href='{link}' target='_blank' style='color:#10233f;text-decoration:underline;"
-            f"text-decoration-color:#c9a86a;'>{role}</a>"
-            if link else role
-        )
-        extra = "  ·  <span style='color:#b8924a;'>Read the report ↗</span>" if link else ""
+    cur_cols = st.columns(2)
+    for i, (role, org) in enumerate(current_roles):
+        with cur_cols[i % 2]:
+            st.markdown(
+                f"<div class='card' style='margin-bottom:0.6rem;'><h4 style='margin-bottom:0.15rem;'>{role}</h4>"
+                f"<p>{org}</p></div>",
+                unsafe_allow_html=True,
+            )
+
+    st.markdown("<h4 style='color:#10233f;margin:1rem 0 0.6rem 0;'>Previous</h4>", unsafe_allow_html=True)
+    previous_roles = [
+        ("Deputy Director", "Illinois Community for Displaced Immigrants"),
+        ("Freedom Fellow", "Detention Watch Network"),
+    ]
+    prev_cols = st.columns(2)
+    for i, (role, org) in enumerate(previous_roles):
+        with prev_cols[i % 2]:
+            st.markdown(
+                f"<div class='card' style='margin-bottom:0.6rem;'><h4 style='margin-bottom:0.15rem;'>{role}</h4>"
+                f"<p>{org}</p></div>",
+                unsafe_allow_html=True,
+            )
+
+    st.markdown("<div class='divider'></div>", unsafe_allow_html=True)
+
+    # ---- Awards & Recognition ----
+    st.markdown("<div class='section-label'>Awards & Recognition</div>", unsafe_allow_html=True)
+    st.markdown("<div class='section-title'>Honors</div>", unsafe_allow_html=True)
+    for title, desc in RECOGNITION:
         st.markdown(
-            f"<div class='card' style='margin-bottom:0.6rem;'>"
-            f"<h4 style='margin-bottom:0.15rem;'>{title_html}{extra}</h4>"
-            f"<p style='margin-bottom:0.1rem;'>{org}</p>"
-            f"<p style='color:#9aa0a8;font-size:0.82rem;margin:0;'>{dates}</p>"
-            f"</div>",
+            f"<div class='card' style='margin-bottom:0.6rem;'><h4 style='margin-bottom:0.15rem;'>{title}</h4>"
+            f"<p>{desc}</p></div>",
             unsafe_allow_html=True,
         )
 
     st.markdown("<div class='divider'></div>", unsafe_allow_html=True)
 
-    st.markdown("<div class='section-label'>Signature Expertise</div>", unsafe_allow_html=True)
-    st.markdown("<div class='section-title'>Areas of Focus</div>", unsafe_allow_html=True)
-    areas = [
-        "Immigration policy & systems", "Workforce development", "Housing & homelessness",
-        "Community health", "Mental health access", "Nonprofit strategy",
-        "Organizational leadership", "Public policy", "Economic mobility",
-        "Cross-sector partnerships", "International talent retention",
-        "Research & policy analysis", "Program design & evaluation",
-        "Community engagement", "Human-centered leadership",
+    # ---- Collaborations ----
+    st.markdown("<div class='section-label'>Collaborations</div>", unsafe_allow_html=True)
+    st.markdown("<div class='section-title'>Selected Collaborations</div>", unsafe_allow_html=True)
+    st.write(
+        "Johannes has collaborated with government agencies, universities, nonprofits, foundations, "
+        "and community organizations to improve outcomes for immigrant and underserved communities."
+    )
+    collaborations = [
+        "Bridge Communities", "Illinois Community for Displaced Immigrants",
+        "Interfaith Community for Detained Immigrants", "Detention Watch Network",
+        "National Immigrant Justice Center", "Illinois Coalition for Immigrant and Refugee Rights",
+        "Midwest Immigration Bond Fund", "Simmons Center for Global Chicago",
+        "University of Chicago", "University of Illinois Chicago", "DePaul University",
+        "Lewis University", "Santa Clara University", "Loyola School of New York",
+        "Chicago Religious Leadership Network", "Chicago Refugee Coalition", "6000 Moms",
+        "Progressives for Change", "Elmhurst Rotary Club", "Darst Center", "Save the Children",
     ]
     st.markdown(
-        "".join([f"<span class='tag'>{a}</span>" for a in areas]),
+        "".join(f"<span class='tag'>{c}</span>" for c in collaborations),
         unsafe_allow_html=True,
     )
 
     st.markdown("<div class='divider'></div>", unsafe_allow_html=True)
 
+    # ---- Beyond the Work ----
     st.markdown(
         """
         <style>
@@ -581,10 +842,17 @@ elif st.session_state.page == "About":
         with pcol3:
             st.image("assets/johannes-favi-family3.jpg", use_container_width=True)
     st.write(
-        "Johannes is a proud father of three. He enjoys outdoor activities, traveling, and "
-        "exploring cultures around the world with his partner and kids. He is also a passionate "
-        "home cook, known for bringing the bold, comforting flavors of his native Benin to the "
-        "table and sharing them generously with family and friends."
+        "While policy and organizational leadership define Johannes' professional work, they are "
+        "rooted in deeply personal values. Johannes is a proud father of three whose experiences as "
+        "both a parent and an immigrant continue to shape his approach to leadership, service, and "
+        "community building. He believes lasting systems change begins with listening, empathy, and "
+        "investing in people's dignity."
+    )
+    st.write(
+        "Outside of his professional work, Johannes enjoys outdoor activities, traveling, and "
+        "exploring cultures around the world with his partner and kids. He is also a passionate home "
+        "cook, known for bringing the bold, comforting flavors of his native Benin to the table and "
+        "sharing them generously with family and friends."
     )
 
     st.markdown("<div class='divider'></div>", unsafe_allow_html=True)
@@ -665,6 +933,23 @@ elif st.session_state.page == "Speaking":
         "leadership retreats, and university lectures, tailored to your audience and objectives.</p></div>",
         unsafe_allow_html=True,
     )
+
+    st.markdown("<div class='divider'></div>", unsafe_allow_html=True)
+
+    st.markdown("<div class='section-label'>Featured Documentary</div>", unsafe_allow_html=True)
+    st.markdown(
+        "<div class='card'><h4>Caged Dreams</h4><p>Screenings and talks exploring immigration "
+        "detention, mental health, and systems change, presented alongside the documentary "
+        "Caged Dreams.</p></div>",
+        unsafe_allow_html=True,
+    )
+    st.write("**Featured screenings**")
+    st.markdown(
+        "".join(f"<span class='tag'>{s}</span>" for s in SCREENINGS),
+        unsafe_allow_html=True,
+    )
+
+    st.markdown("<div class='divider'></div>", unsafe_allow_html=True)
     st.link_button("Inquire About Speaking", f"mailto:{CONTACT_EMAIL}?subject=Speaking%20Inquiry")
 
 # ----------------------------------------------------------------------------
@@ -686,6 +971,111 @@ elif st.session_state.page == "Advisory":
         unsafe_allow_html=True,
     )
     st.link_button("Explore Advisory Services", f"mailto:{CONTACT_EMAIL}?subject=Advisory%20Services%20Inquiry")
+
+# ----------------------------------------------------------------------------
+# MEDIA
+# ----------------------------------------------------------------------------
+elif st.session_state.page == "Media":
+    st.markdown(
+        """
+        <div class="media-banner">
+            <h1>Caged Dreams</h1>
+            <p>A documentary on immigration detention, mental health, and healing.</p>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
+    trailer_col1, trailer_col2 = st.columns(2)
+    with trailer_col1:
+        st.link_button("Watch Trailer", CAGED_DREAMS_TRAILER_URL, use_container_width=True)
+    with trailer_col2:
+        st.link_button("Visit Caged Dreams", CAGED_DREAMS_URL, use_container_width=True)
+
+    st.markdown("<div class='divider'></div>", unsafe_allow_html=True)
+
+    st.markdown("<div class='section-label'>Synopsis</div>", unsafe_allow_html=True)
+    st.write(
+        "Caged Dreams began as an award-recognized documentary exploring the mental health "
+        "consequences of immigration detention. Today it has grown into a broader initiative "
+        "dedicated to supporting newly arrived immigrants through mental health advocacy, "
+        "education, storytelling, and community partnerships."
+    )
+    st.write(
+        "The documentary has been screened at universities, community organizations, and public "
+        "forums across the United States, creating dialogue about immigration detention, trauma, "
+        "resilience, and systems change."
+    )
+
+    st.markdown("<div class='divider'></div>", unsafe_allow_html=True)
+
+    st.markdown("<div class='section-label'>Screenings</div>", unsafe_allow_html=True)
+    st.markdown(
+        "".join(f"<span class='tag'>{s}</span>" for s in SCREENINGS),
+        unsafe_allow_html=True,
+    )
+
+    st.markdown("<div class='divider'></div>", unsafe_allow_html=True)
+
+    st.markdown("<div class='section-label'>Awards</div>", unsafe_allow_html=True)
+    st.markdown(
+        "".join(f"<span class='tag-gold'>{title}</span>" for title, _ in RECOGNITION),
+        unsafe_allow_html=True,
+    )
+
+    st.markdown("<div class='divider'></div>", unsafe_allow_html=True)
+
+    st.markdown("<div class='section-label'>Discussion Guide</div>", unsafe_allow_html=True)
+    st.write("A discussion guide for community screenings, classrooms, and organizing groups.")
+    st.link_button("Download Discussion Guide", DISCUSSION_GUIDE_URL)
+
+# ----------------------------------------------------------------------------
+# RESOURCES
+# ----------------------------------------------------------------------------
+elif st.session_state.page == "Resources":
+    st.markdown("<div class='section-label'>Resources</div>", unsafe_allow_html=True)
+    st.markdown("<div class='section-title'>Articles, Reports & Downloads</div>", unsafe_allow_html=True)
+    st.write(
+        "A growing library of writing and research on immigration policy, housing, and community "
+        "leadership. Check back soon for new additions."
+    )
+
+    resource_sections = [
+        ("LinkedIn Articles", "Selected essays and commentary, republished here as they are added."),
+        ("Policy Papers", "Policy analysis and briefs on immigration, housing, and workforce systems."),
+        ("Reports", "Research reports and task force findings, including collaborative publications."),
+        ("Videos", "Talks, panels, and interviews, added as recordings become available."),
+        ("Downloads", "Guides, fact sheets, and other materials available for download."),
+    ]
+    for title, desc in resource_sections:
+        st.markdown(f"<div class='section-label' style='margin-top:1.2rem;'>{title}</div>", unsafe_allow_html=True)
+        st.markdown(
+            f"<div class='placeholder-card'>{desc}<br><em>Coming soon</em></div>",
+            unsafe_allow_html=True,
+        )
+
+# ----------------------------------------------------------------------------
+# TESTIMONIALS
+# ----------------------------------------------------------------------------
+elif st.session_state.page == "Testimonials":
+    st.markdown("<div class='section-label'>Testimonials & Endorsements</div>", unsafe_allow_html=True)
+    st.markdown("<div class='section-title'>What Collaborators Say</div>", unsafe_allow_html=True)
+    st.write(
+        "Endorsements from university faculty, nonprofit leaders, government officials, "
+        "collaborators, and conference organizers will be added here as they are collected."
+    )
+
+    counter = 1
+    for category, count in TESTIMONIAL_CATEGORIES:
+        st.markdown(f"<div class='section-label' style='margin-top:1.4rem;'>{category}</div>", unsafe_allow_html=True)
+        t_cols = st.columns(count if count > 1 else 1)
+        for i in range(count):
+            with t_cols[i]:
+                st.markdown(
+                    f"<div class='placeholder-card'>Testimonial {counter}<br><em>Coming soon</em></div>",
+                    unsafe_allow_html=True,
+                )
+            counter += 1
 
 # ----------------------------------------------------------------------------
 # CONTACT
