@@ -14,10 +14,8 @@ st.set_page_config(
 
 CONTACT_EMAIL = "contactcageddreams@gmail.com"
 
-# TODO: replace these placeholders with the real Caged Dreams links once available.
 CAGED_DREAMS_URL = "https://cageddreams.com/"
 CAGED_DREAMS_FILM_URL = "https://www.youtube.com/watch?v=9tPgUSNf22Y"
-DISCUSSION_GUIDE_URL = "#"
 
 
 def _img_to_data_uri(path: str) -> str:
@@ -457,10 +455,14 @@ st.markdown(
             flex-wrap: wrap !important;
             gap: 0.15rem 0.5rem !important;
         }
-        .st-key-nav_bar div[data-testid="column"] {
+        .st-key-nav_bar div[data-testid="stColumn"] {
             width: auto !important;
             flex: 0 0 auto !important;
             min-width: 0 !important;
+        }
+        .st-key-nav_bar button,
+        .nav-active {
+            white-space: nowrap;
         }
 
         @media (max-width: 768px) {
@@ -1022,12 +1024,6 @@ elif st.session_state.page == "Media":
         "".join(f"<span class='tag-gold'>{title}</span>" for title, _ in RECOGNITION),
         unsafe_allow_html=True,
     )
-
-    st.markdown("<div class='divider'></div>", unsafe_allow_html=True)
-
-    st.markdown("<div class='section-label'>Discussion Guide</div>", unsafe_allow_html=True)
-    st.write("A discussion guide for community screenings, classrooms, and organizing groups.")
-    st.link_button("Download Discussion Guide", DISCUSSION_GUIDE_URL)
 
 # ----------------------------------------------------------------------------
 # TESTIMONIALS
