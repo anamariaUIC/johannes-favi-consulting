@@ -1757,14 +1757,10 @@ elif st.session_state.page == "Services":
                 st.rerun()
 
     st.markdown("<div class='divider'></div>", unsafe_allow_html=True)
-    st.write("**Need strategic guidance? Book a discovery call.**")
-    col1, col2 = st.columns(2)
-    with col1:
-        if st.button("Discuss Your Project", key="services_cta1", use_container_width=True):
-            go_to("Contact")
-            st.rerun()
-    with col2:
-        st.link_button("Request a Custom Engagement", f"mailto:{CONTACT_EMAIL}?subject=Custom%20Engagement%20Request")
+    st.write("**Need strategic guidance?**")
+    if st.button("Contact", key="services_cta1"):
+        go_to("Contact")
+        st.rerun()
 
 # ----------------------------------------------------------------------------
 # SPEAKING
