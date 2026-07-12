@@ -393,7 +393,7 @@ st.markdown(
             align-items: center;
             gap: 2.2rem;
         }
-        .fp-text { flex: 1.3; min-width: 0; }
+        .fp-text { flex: 1.1; min-width: 0; }
         .fp-photo {
             flex: 1;
             display: flex;
@@ -401,7 +401,7 @@ st.markdown(
         }
         .fp-photo img {
             width: 100%;
-            max-width: 220px;
+            max-width: 340px;
             border-radius: 10px;
             box-shadow: 0 14px 32px rgba(0,0,0,0.35);
         }
