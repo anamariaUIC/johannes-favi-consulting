@@ -193,7 +193,7 @@ st.markdown(
         .block-container {
             padding-top: 1.5rem;
             padding-bottom: 3rem;
-            max-width: 1100px;
+            max-width: 1180px;
         }
 
         h1, h2, h3 {
@@ -721,7 +721,8 @@ st.markdown(
             border-bottom: 3px solid transparent !important;
             border-radius: 0 !important;
             font-weight: 500 !important;
-            padding: 0.3rem 0.2rem 0.6rem 0.2rem !important;
+            font-size: 0.93rem !important;
+            padding: 0.3rem 0.15rem 0.6rem 0.15rem !important;
             box-shadow: none !important;
         }
         .st-key-nav_bar button:hover {
@@ -732,8 +733,9 @@ st.markdown(
         .nav-active {
             color: #b8924a;
             font-weight: 600;
+            font-size: 0.93rem;
             border-bottom: 3px solid #b8924a;
-            padding: 0.3rem 0.2rem 0.6rem 0.2rem;
+            padding: 0.3rem 0.15rem 0.6rem 0.15rem;
             display: inline-block;
         }
         .brand-name {
@@ -770,7 +772,7 @@ st.markdown(
 
         .st-key-nav_bar div[data-testid="stHorizontalBlock"] {
             flex-wrap: wrap !important;
-            gap: 0.15rem 0.5rem !important;
+            gap: 0.1rem 0.35rem !important;
         }
         .st-key-nav_bar div[data-testid="stColumn"] {
             width: auto !important;
@@ -1669,6 +1671,11 @@ elif st.session_state.page == "Services":
         ("Training, Speaking, and Advisory Services",
          "Offering customized workshops, keynote speaking, strategic facilitation, and ongoing "
          "advisory support."),
+        ("Cross-Sector Partnerships & Coalition Building",
+         "Bringing organizations together to solve complex challenges through strategic "
+         "partnerships, stakeholder engagement, coalition development, and collaborative "
+         "leadership across government, nonprofit, academic, healthcare, philanthropic, and "
+         "community sectors."),
     ]
 
     st.markdown(
