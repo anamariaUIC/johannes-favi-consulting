@@ -28,6 +28,22 @@ def _img_to_data_uri(path: str) -> str:
 
 HERO_PHOTO_URI = _img_to_data_uri("assets/johannes-favi-hero.jpg")
 
+ORG_LOGOS = [
+    ("assets/logos/logo-bridge-communities.png", "Bridge Communities"),
+    ("assets/logos/logo-uchicago.png", "University of Chicago"),
+    ("assets/logos/logo-uic.png", "University of Illinois Chicago"),
+    ("assets/logos/logo-depaul.png", "DePaul University"),
+    ("assets/logos/logo-nijc.png", "National Immigrant Justice Center"),
+    ("assets/logos/logo-dwn.png", "Detention Watch Network"),
+    ("assets/logos/logo-ccga.png", "Chicago Council on Global Affairs"),
+    ("assets/logos/logo-icdi.png", "Illinois Community for Displaced Immigrants"),
+    ("assets/logos/logo-illinois-gov.png", "State of Illinois"),
+    ("assets/logos/logo-clg.png", "Catholic Lawyers Guild of Chicago"),
+    ("assets/logos/logo-harris.png", "University of Chicago Harris School of Public Policy"),
+    ("assets/logos/logo-healing-horizons.png", "Healing Horizons"),
+]
+ORG_LOGO_URIS = [(_img_to_data_uri(path), alt) for path, alt in ORG_LOGOS]
+
 # ----------------------------------------------------------------------------
 # GLOBAL STYLE
 # ----------------------------------------------------------------------------
@@ -129,6 +145,23 @@ st.markdown(
             font-size: 0.8rem;
             font-weight: 600;
             margin-bottom: 0.9rem;
+        }
+
+        /* Featured organizations logo strip */
+        .logo-strip {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            gap: 2.2rem 2.6rem;
+            padding: 1.6rem 1rem;
+            background: var(--off-white);
+            border-radius: 12px;
+        }
+        .logo-strip img {
+            height: 34px;
+            width: auto;
+            object-fit: contain;
         }
 
         /* Section headers */
@@ -430,6 +463,13 @@ st.markdown(
             .section-title {
                 font-size: 1.4rem;
             }
+            .logo-strip {
+                gap: 1.3rem 1.6rem;
+                padding: 1.2rem 0.8rem;
+            }
+            .logo-strip img {
+                height: 26px;
+            }
             .card {
                 padding: 1.1rem 1.2rem;
             }
@@ -714,6 +754,12 @@ if st.session_state.page == "Home":
         "</div>",
         unsafe_allow_html=True,
     )
+
+    # ---- Featured Organizations ----
+    logo_imgs_html = "".join(
+        f"<img src='{uri}' alt='{alt}' title='{alt}'>" for uri, alt in ORG_LOGO_URIS
+    )
+    st.markdown(f"<div class='logo-strip'>{logo_imgs_html}</div>", unsafe_allow_html=True)
 
     st.markdown("<div class='divider'></div>", unsafe_allow_html=True)
 
@@ -1002,6 +1048,11 @@ elif st.session_state.page == "About":
         "".join(f"<span class='tag'>{c}</span>" for c in collaborations),
         unsafe_allow_html=True,
     )
+    st.write("")
+    logo_imgs_html_about = "".join(
+        f"<img src='{uri}' alt='{alt}' title='{alt}'>" for uri, alt in ORG_LOGO_URIS
+    )
+    st.markdown(f"<div class='logo-strip'>{logo_imgs_html_about}</div>", unsafe_allow_html=True)
 
     st.markdown("<div class='divider'></div>", unsafe_allow_html=True)
 
