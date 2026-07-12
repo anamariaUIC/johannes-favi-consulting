@@ -1457,7 +1457,6 @@ elif st.session_state.page == "Services":
     st.markdown("<div id='services'></div>", unsafe_allow_html=True)
     st.markdown("<div class='section-label'>What I Do</div>", unsafe_allow_html=True)
     st.markdown("<div class='section-title'>Services Overview</div>", unsafe_allow_html=True)
-    st.image("assets/johannes-favi-services.jpg", use_container_width=True)
 
     services = [
         ("Immigration & Workforce Integration",
@@ -1483,6 +1482,16 @@ elif st.session_state.page == "Services":
          "advisory support."),
     ]
 
+    st.markdown(
+        """
+        <style>
+            .st-key-services_photo img {
+                border-radius: 10px;
+            }
+        </style>
+        """,
+        unsafe_allow_html=True,
+    )
     cols = st.columns(2)
     for i, (title, desc) in enumerate(services):
         with cols[i % 2]:
@@ -1490,6 +1499,9 @@ elif st.session_state.page == "Services":
                 f"<div class='card'><h4>{title}</h4><p>{desc}</p></div>",
                 unsafe_allow_html=True,
             )
+    with cols[1]:
+        with st.container(key="services_photo"):
+            st.image("assets/johannes-favi-services.jpg", use_container_width=True)
 
     st.markdown("<div class='divider'></div>", unsafe_allow_html=True)
 
