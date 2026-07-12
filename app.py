@@ -298,6 +298,45 @@ st.markdown(
             margin-bottom: 0.8rem;
         }
 
+        .press-item {
+            border-bottom: 1px solid #eee;
+            padding: 0.9rem 0;
+        }
+        .press-item:last-child {
+            border-bottom: none;
+        }
+        .press-item .press-title {
+            color: var(--navy);
+            font-weight: 600;
+            font-size: 0.98rem;
+            margin-bottom: 0.15rem;
+        }
+        .press-item .press-meta {
+            color: var(--gold);
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.35rem;
+        }
+        .press-item .press-desc {
+            color: var(--gray);
+            font-size: 0.9rem;
+            line-height: 1.55;
+        }
+        .press-item .press-link {
+            display: inline-block;
+            color: var(--navy) !important;
+            text-decoration: underline;
+            text-decoration-color: #c9a86a;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-top: 0.45rem;
+        }
+        .press-item .press-link:hover {
+            color: var(--gold) !important;
+        }
+
         .testimonial-card {
             background: var(--off-white);
             border: 1px solid #eae6dd;
@@ -721,6 +760,140 @@ TASK_FORCE_AREAS = [
     "Economic Opportunity", "Public Safety", "Civic Participation",
 ]
 
+# Each press item: (headline, source, date, description, link_text, link_url)
+PRESS_FEATURED = [
+    ("Detained Immigrants Turn to the Courts to Protect Themselves From COVID-19", "WBEZ Chicago", "April 23, 2020",
+     "WBEZ reported on Johannes Favi's release from immigration detention following emergency federal "
+     "litigation during the COVID-19 pandemic. The article examined the health risks facing detained "
+     "immigrants and the impact of prolonged detention on families.",
+     "Read the article",
+     "https://www.wbez.org/race-class-communities/2020/04/23/detained-immigrants-turn-to-the-courts-to-protect-themselves-from-covid-19"),
+    ("Illinois Sets National Precedent in Banning Immigration Detention", "Truthout", "December 16, 2021",
+     "Johannes was interviewed about his experience spending more than ten months in immigration "
+     "detention and his advocacy supporting Illinois legislation that ended local government contracts "
+     "with immigration detention facilities.",
+     "Read the article",
+     "https://truthout.org/articles/illinois-sets-national-precedent-in-banning-immigration-detention/"),
+    ("Illinois Law Ending Immigration Detention in 2022 Hits a Snag", "WBEZ Chicago", "January 4, 2022",
+     "Johannes was featured as a formerly detained immigrant and advocate working to end immigration "
+     "detention in Illinois.",
+     "Read the article",
+     "https://www.wbez.org/race-class-communities/2022/01/04/illinois-law-ending-immigration-detention-in-2022-hits-a-snag"),
+    ("ICE Camps Are Not Untouchable: How Communities Can Push Back", "Truthout", "May 28, 2026",
+     "Johannes was referenced as a Chicago-area advocate whose lived experience and relationships with "
+     "detained immigrants help expose conditions inside immigration detention facilities.",
+     "Listen and read",
+     "https://truthout.org/audio/ice-camps-are-not-untouchable-heres-how-communities-can-push-back/"),
+]
+
+DOCUMENTARY_COVERAGE = [
+    ("On World Mental Health Day, Detention Watch Network Premieres Caged Dreams", "Detention Watch Network", "October 10, 2023",
+     "The official premiere announcement introduced the documentary and highlighted Johannes's experience "
+     "as a formerly detained immigrant and advocate.",
+     "Read the announcement",
+     "https://www.detentionwatchnetwork.org/pressroom/releases/2023/on-world-mental-health-day-detention-watch-network-premieres-caged-dreams"),
+    ("Caged Dreams Presented by the Maine Film Center", "Maine Film Center and Waterville Creates", "February 2, 2024",
+     "The Maine Film Center featured Caged Dreams as part of its public film programming and identified "
+     "Johannes as the documentary's director and one of its featured storytellers.",
+     "View the feature",
+     "https://www.watervillecreates.org/shows/caged-dreams/"),
+]
+
+PERSONAL_STORY = [
+    ("NIJC Sues Illinois Jail to Release Immigrants at Severe Risk During COVID-19", "National Immigrant Justice Center", "April 9, 2020",
+     "Johannes was identified as one of the immigrants represented in emergency federal litigation seeking "
+     "the release of medically vulnerable people from the Jerome Combs Detention Center during the "
+     "COVID-19 pandemic.",
+     "Read the release",
+     "https://immigrantjustice.org/press-release/nijc-sues-illinois-jail-to-release-immigrants-in-ice-custody-who-face-severe-risk-during-covid-19-pandemic/"),
+    ("\u201cI Think Every Day About the People Who Are Still in Detention\u201d", "National Immigrant Justice Center", "May 13, 2020",
+     "In this first-person profile, Johannes described nearly one year in immigration detention, "
+     "separation from his family, the birth of his child during detention, and his testimony before "
+     "members of Congress.",
+     "Read Johannes's story",
+     "https://immigrantjustice.org/blog/i-think-every-day-about-the-people-who-are-still-in-detention-who-should-not-be-there-johanness-story/"),
+    ("COVID-19 Habeas Litigation: Delome Johannes Favi", "National Immigrant Justice Center", "2020",
+     "This legal case profile documents Johannes's detention, medical vulnerability, federal habeas "
+     "petition, and court-ordered release.",
+     "View the case profile",
+     "https://immigrantjustice.org/for-attorneys/cases/covid-19-habeas-litigation/"),
+    ("Johannes Tells Congress About ICE Detention During COVID-19", "National Immigrant Justice Center", "2020",
+     "Johannes testified about immigration detention conditions, family separation, and the risks faced "
+     "by detained people during the pandemic.",
+     "Watch the testimony",
+     "https://www.youtube.com/watch?v=EDT4BVSeMcg"),
+]
+
+PROFILES = [
+    ("Johannes Favi, Emerging Leader", "Chicago Council on Global Affairs",
+     "The Chicago Council profile highlights Johannes's immigration advocacy, nonprofit leadership, "
+     "public policy work, and the development of Caged Dreams.",
+     "Read the profile",
+     "https://globalaffairs.org/emerging-leaders/johannes-favi"),
+    ("Johannes Favi, Change Collective Member", "Obama Foundation Change Collective",
+     "This profile presents Johannes's work advancing immigrant mental health, leadership development, "
+     "and community-centered solutions.",
+     "Read the profile",
+     "https://change-collective.org/members/favi-johannes/"),
+    ("Johannes Favi Professional Profile", "University of Chicago Center for Effective Government",
+     "The University of Chicago profile highlights Johannes's nonprofit leadership, immigrant advocacy, "
+     "and participation in the Civic Leadership Academy.",
+     "Read the profile",
+     "https://effectivegov.uchicago.edu/people/johannes-favi"),
+]
+
+UNIVERSITY_PROGRAMS = [
+    ("Chicago Style: Caged Dreams, The Trauma of Chicago's Migrant Crisis", "University of Chicago Institute of Politics", "March 29, 2024",
+     "Johannes participated in a screening and public conversation examining immigration detention, "
+     "trauma, mental health, and Chicago's response to newly arrived immigrants.",
+     "View the event",
+     "https://politics.uchicago.edu/events/speaker-series/chicago-style-caged-dreams-the-trauma-of-chicagos-migrant-crisis"),
+    ("Civic Cinema: Caged Dreams", "University of Illinois Chicago", "March 12, 2024",
+     "Johannes joined a post-screening panel focused on immigration detention, mental health, and "
+     "community advocacy.",
+     "View the event",
+     "https://live.today.uic.edu/events/civic-cinema-caged-dreams/"),
+    ("Johannes Favi: Caged Dreams Discussion", "DePaul University", "May 28, 2025",
+     "Johannes discussed the documentary, the long-term consequences of immigration detention, and the "
+     "importance of trauma-informed support for immigrant communities.",
+     "View the event",
+     "https://events.depaul.edu/event/johannes-favi-caged-dreams-discussion"),
+]
+
+GOV_POLICY_PRESS = [
+    ("Illinois Task Force on Black Immigrants Releases Final Report", "State of Illinois", "March 2, 2026",
+     "Johannes was quoted as a member of the Illinois Task Force on Black Immigrants, addressing housing, "
+     "opportunity, and the experiences of Black immigrant communities across Illinois.",
+     "Read the release",
+     "https://www.illinois.gov/news/release.html?releaseid=32254"),
+]
+
+AWARDS_PRESS = [
+    ("Jeanne and Joseph Sullivan Human Rights Award", "National Immigrant Justice Center", "2021",
+     "Johannes received the Jeanne and Joseph Sullivan Human Rights Award in recognition of his courage, "
+     "leadership, and commitment to immigrant justice.",
+     "Visit the National Immigrant Justice Center",
+     "https://immigrantjustice.org/"),
+]
+
+DOCUMENTARY_LINKS = [
+    ("Watch and learn more", "https://www.detentionwatchnetwork.org/caged-dreams"),
+    ("View the official film listing", "https://filmfreeway.com/CagedDreams898"),
+]
+
+ADDITIONAL_MEDIA_TOPICS = [
+    "Immigration detention and deportation", "Mental health and trauma",
+    "Affordable housing and family stability", "Black immigrant experiences",
+    "Public policy and civic leadership", "Community-based advocacy",
+    "Immigrant integration and belonging",
+]
+
+AS_FEATURED_IN = [
+    "WBEZ Chicago", "Truthout", "National Immigrant Justice Center", "Detention Watch Network",
+    "Chicago Council on Global Affairs", "Obama Foundation Change Collective",
+    "University of Chicago", "Maine Film Center",
+]
+
 SCREENINGS = ["University of Chicago", "UIC", "DePaul", "Princeton", "Boston University", "Maine Film Center"]
 
 CURRENT_ROLES = [
@@ -829,6 +1002,26 @@ TESTIMONIALS = {
         ),
     ],
 }
+
+
+def render_press_section(items, with_date=True):
+    """Render a list of press citations, each with a real source link."""
+    html = ""
+    for entry in items:
+        if with_date:
+            headline, source, date, desc, link_text, link_url = entry
+            meta = f"{source} &middot; {date}"
+        else:
+            headline, source, desc, link_text, link_url = entry
+            meta = source
+        html += (
+            f"<div class='press-item'><div class='press-title'>{headline}</div>"
+            f"<div class='press-meta'>{meta}</div>"
+            f"<div class='press-desc'>{desc}</div>"
+            f"<a class='press-link' href='{link_url}' target='_blank'>{link_text} &#8599;</a></div>"
+        )
+    st.markdown(html, unsafe_allow_html=True)
+
 
 # ----------------------------------------------------------------------------
 # HOME
@@ -1445,6 +1638,21 @@ elif st.session_state.page == "Advisory":
 # MEDIA
 # ----------------------------------------------------------------------------
 elif st.session_state.page == "Media":
+    st.markdown("<div class='section-label'>Media & Press</div>", unsafe_allow_html=True)
+    st.markdown("<div class='section-title'>Coverage & Public Leadership</div>", unsafe_allow_html=True)
+    st.write(
+        "Johannes Favi has been featured in local and national media for his work on immigration "
+        "detention, mental health, housing, public policy, and community advocacy. His story and "
+        "leadership have appeared in news coverage, documentaries, university publications, "
+        "government releases, interviews, and public-interest media."
+    )
+    st.write("**As Featured In**")
+    st.markdown(
+        "".join(f"<span class='tag'>{o}</span>" for o in AS_FEATURED_IN),
+        unsafe_allow_html=True,
+    )
+    st.write("")
+
     st.markdown(
         """
         <style>
@@ -1467,6 +1675,15 @@ elif st.session_state.page == "Media":
         st.link_button("Watch Full Film", CAGED_DREAMS_FILM_URL, use_container_width=True)
     with trailer_col2:
         st.link_button("Visit Caged Dreams", CAGED_DREAMS_URL, use_container_width=True)
+    st.markdown(
+        "<div style='text-align:center;margin-top:0.6rem;'>"
+        + " &nbsp;&middot;&nbsp; ".join(
+            f"<a class='press-link' href='{url}' target='_blank'>{text} &#8599;</a>"
+            for text, url in DOCUMENTARY_LINKS
+        )
+        + "</div>",
+        unsafe_allow_html=True,
+    )
 
     st.markdown("<div class='divider'></div>", unsafe_allow_html=True)
 
@@ -1498,6 +1715,7 @@ elif st.session_state.page == "Media":
         "".join(f"<span class='tag-gold'>{title}</span>" for title, _ in RECOGNITION),
         unsafe_allow_html=True,
     )
+    render_press_section(AWARDS_PRESS)
 
     st.markdown("<div class='divider'></div>", unsafe_allow_html=True)
 
@@ -1512,8 +1730,55 @@ elif st.session_state.page == "Media":
     )
     st.write("")
     st.link_button("Download Report", TASK_FORCE_REPORT_URL)
+    render_press_section(GOV_POLICY_PRESS)
 
     st.markdown("<div class='divider'></div>", unsafe_allow_html=True)
+
+    st.markdown("<div class='section-label'>Featured Media</div>", unsafe_allow_html=True)
+    render_press_section(PRESS_FEATURED)
+
+    st.markdown("<div class='divider'></div>", unsafe_allow_html=True)
+
+    st.markdown("<div class='section-label'>Documentary Coverage</div>", unsafe_allow_html=True)
+    render_press_section(DOCUMENTARY_COVERAGE)
+
+    st.markdown("<div class='divider'></div>", unsafe_allow_html=True)
+
+    st.markdown("<div class='section-label'>Personal Story & Advocacy</div>", unsafe_allow_html=True)
+    render_press_section(PERSONAL_STORY)
+
+    st.markdown("<div class='divider'></div>", unsafe_allow_html=True)
+
+    st.markdown("<div class='section-label'>Profiles & Leadership Features</div>", unsafe_allow_html=True)
+    render_press_section(PROFILES, with_date=False)
+
+    st.markdown("<div class='divider'></div>", unsafe_allow_html=True)
+
+    st.markdown("<div class='section-label'>University & Public Programs</div>", unsafe_allow_html=True)
+    render_press_section(UNIVERSITY_PROGRAMS)
+
+    st.markdown("<div class='divider'></div>", unsafe_allow_html=True)
+
+    st.markdown("<div class='section-label'>Additional Media</div>", unsafe_allow_html=True)
+    st.write(
+        "Johannes has also participated in television interviews, public discussions, podcasts, "
+        "university programs, conferences, and community forums focused on:"
+    )
+    st.markdown(
+        "<div class='checklist'>"
+        + "".join(f"<span class='checklist-item'><span class='check'>&#10003;</span>{t}</span>" for t in ADDITIONAL_MEDIA_TOPICS)
+        + "</div>",
+        unsafe_allow_html=True,
+    )
+    st.caption("Additional archived interviews and appearances will be added as permanent links become publicly available.")
+
+    st.markdown("<div class='divider'></div>", unsafe_allow_html=True)
+    st.write("**Media Inquiries**")
+    st.write(
+        "For interviews, speaking engagements, documentary screenings, panel discussions, or media "
+        "inquiries, contact Johannes Favi, immigrant advocate, nonprofit leader, filmmaker, and "
+        "public-policy practitioner."
+    )
     st.write("**Looking for an expert source or speaker? Get in touch.**")
     if st.button("Contact Me", key="media_cta1"):
         go_to("Contact")
