@@ -427,7 +427,6 @@ with tabs[5]:
         .cf-submit:hover {{ background-color: #a37d38; color: #ffffff; }}
         .cf-row {{ display: flex; gap: 1rem; }}
         .cf-row > div {{ flex: 1; }}
-    </style>
         .cf-status {{
             display: none;
             margin-top: 0.8rem;
