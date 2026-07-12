@@ -1457,6 +1457,7 @@ elif st.session_state.page == "Services":
     st.markdown("<div id='services'></div>", unsafe_allow_html=True)
     st.markdown("<div class='section-label'>What I Do</div>", unsafe_allow_html=True)
     st.markdown("<div class='section-title'>Services Overview</div>", unsafe_allow_html=True)
+    st.image("assets/johannes-favi-services.jpg", use_container_width=True)
 
     services = [
         ("Immigration & Workforce Integration",
