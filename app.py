@@ -219,18 +219,6 @@ st.markdown(
             font-size: 0.98rem;
         }
 
-        /* Media banner */
-        .media-banner {
-            background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 100%);
-            border-radius: 14px;
-            padding: 2.6rem;
-            text-align: center;
-            color: #ffffff;
-            margin-bottom: 2rem;
-        }
-        .media-banner h1 { color: #ffffff; margin-bottom: 0.4rem; }
-        .media-banner p { color: var(--gold); font-size: 1.05rem; margin: 0; }
-
         .placeholder-card {
             background: #f7f5f0;
             border: 1px dashed #d8d0bd;
@@ -349,9 +337,6 @@ st.markdown(
             }
             .featured-project {
                 padding: 1.6rem 1.4rem;
-            }
-            .media-banner {
-                padding: 1.8rem 1.3rem;
             }
             .cta-strip {
                 padding: 1.5rem 1.25rem;
@@ -980,14 +965,21 @@ elif st.session_state.page == "Advisory":
 elif st.session_state.page == "Media":
     st.markdown(
         """
-        <div class="media-banner">
-            <h1>Caged Dreams</h1>
-            <p>A documentary on immigration detention, mental health, and healing.</p>
-        </div>
+        <style>
+            .st-key-flyer_wrap img {
+                border-radius: 10px;
+                box-shadow: 0 14px 32px rgba(16, 35, 63, 0.28);
+            }
+        </style>
         """,
         unsafe_allow_html=True,
     )
+    flyer_col1, flyer_col2, flyer_col3 = st.columns([1, 1.4, 1])
+    with flyer_col2:
+        with st.container(key="flyer_wrap"):
+            st.image("assets/caged-dreams-flyer.jpg", use_container_width=True)
 
+    st.write("")
     trailer_col1, trailer_col2 = st.columns(2)
     with trailer_col1:
         st.link_button("Watch Full Film", CAGED_DREAMS_FILM_URL, use_container_width=True)
