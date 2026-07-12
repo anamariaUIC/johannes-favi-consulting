@@ -1677,9 +1677,10 @@ elif st.session_state.page == "Services":
          "Advising statewide initiatives and translating community needs into practical policy "
          "recommendations, grounded in direct experience at the intersection of policy and "
          "implementation."),
-        ("Research & Data Consulting",
-         "Turning complex information into actionable insight through evaluation, reports, and "
-         "data storytelling."),
+        ("Research, Evaluation & Strategic Insight",
+         "Transforming research, policy analysis, organizational data, and community insights "
+         "into practical strategies that strengthen decision-making, improve programs, and "
+         "support long-term organizational success."),
         ("Community Engagement",
          "Building authentic relationships through listening sessions, facilitation, and "
          "partnership development."),
