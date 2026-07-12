@@ -411,6 +411,21 @@ st.markdown(
             margin-bottom: 0.8rem;
         }
 
+        /* Expanders (used for collapsible Media sections) */
+        div[data-testid="stExpander"] {
+            border: 1px solid #eae6dd;
+            border-radius: 10px;
+            margin-bottom: 0.7rem;
+        }
+        div[data-testid="stExpander"] summary {
+            font-weight: 600;
+            color: var(--navy);
+            font-size: 1rem;
+        }
+        div[data-testid="stExpander"] summary:hover {
+            color: var(--gold);
+        }
+
         .press-item {
             border-bottom: 1px solid #eee;
             padding: 0.9rem 0;
@@ -1948,43 +1963,33 @@ elif st.session_state.page == "Media":
 
     st.markdown("<div class='divider'></div>", unsafe_allow_html=True)
 
-    st.markdown("<div class='section-label'>Featured Media</div>", unsafe_allow_html=True)
-    render_press_section(PRESS_FEATURED)
+    with st.expander("Featured Media"):
+        render_press_section(PRESS_FEATURED)
 
-    st.markdown("<div class='divider'></div>", unsafe_allow_html=True)
+    with st.expander("Documentary Coverage"):
+        render_press_section(DOCUMENTARY_COVERAGE)
 
-    st.markdown("<div class='section-label'>Documentary Coverage</div>", unsafe_allow_html=True)
-    render_press_section(DOCUMENTARY_COVERAGE)
+    with st.expander("Personal Story & Advocacy"):
+        render_press_section(PERSONAL_STORY)
 
-    st.markdown("<div class='divider'></div>", unsafe_allow_html=True)
+    with st.expander("Profiles & Leadership Features"):
+        render_press_section(PROFILES, with_date=False)
 
-    st.markdown("<div class='section-label'>Personal Story & Advocacy</div>", unsafe_allow_html=True)
-    render_press_section(PERSONAL_STORY)
+    with st.expander("University & Public Programs"):
+        render_press_section(UNIVERSITY_PROGRAMS)
 
-    st.markdown("<div class='divider'></div>", unsafe_allow_html=True)
-
-    st.markdown("<div class='section-label'>Profiles & Leadership Features</div>", unsafe_allow_html=True)
-    render_press_section(PROFILES, with_date=False)
-
-    st.markdown("<div class='divider'></div>", unsafe_allow_html=True)
-
-    st.markdown("<div class='section-label'>University & Public Programs</div>", unsafe_allow_html=True)
-    render_press_section(UNIVERSITY_PROGRAMS)
-
-    st.markdown("<div class='divider'></div>", unsafe_allow_html=True)
-
-    st.markdown("<div class='section-label'>Additional Media</div>", unsafe_allow_html=True)
-    st.write(
-        "Johannes has also participated in television interviews, public discussions, podcasts, "
-        "university programs, conferences, and community forums focused on:"
-    )
-    st.markdown(
-        "<div class='checklist'>"
-        + "".join(f"<span class='checklist-item'><span class='check'>&#10003;</span>{t}</span>" for t in ADDITIONAL_MEDIA_TOPICS)
-        + "</div>",
-        unsafe_allow_html=True,
-    )
-    st.caption("Additional archived interviews and appearances will be added as permanent links become publicly available.")
+    with st.expander("Additional Media"):
+        st.write(
+            "Johannes has also participated in television interviews, public discussions, podcasts, "
+            "university programs, conferences, and community forums focused on:"
+        )
+        st.markdown(
+            "<div class='checklist'>"
+            + "".join(f"<span class='checklist-item'><span class='check'>&#10003;</span>{t}</span>" for t in ADDITIONAL_MEDIA_TOPICS)
+            + "</div>",
+            unsafe_allow_html=True,
+        )
+        st.caption("Additional archived interviews and appearances will be added as permanent links become publicly available.")
 
     st.markdown("<div class='divider'></div>", unsafe_allow_html=True)
     st.write("**Media Inquiries**")
