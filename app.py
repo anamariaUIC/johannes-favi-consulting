@@ -1254,31 +1254,36 @@ if st.session_state.page == "Home":
 elif st.session_state.page == "About":
     st.markdown("<div class='section-label'>About</div>", unsafe_allow_html=True)
     st.markdown("<div class='section-title'>Executive Biography</div>", unsafe_allow_html=True)
-    st.write(
-        "Johannes Favi is a strategic consultant, nonprofit executive, human rights advocate, and "
-        "community leader dedicated to building stronger systems that expand opportunity for "
-        "underserved communities."
-    )
-    st.write(
-        "His work spans immigration, housing, workforce development, nonprofit leadership, "
-        "organizational strategy, public policy, and community engagement."
-    )
-    st.write(
-        "Johannes previously served as Deputy Director of the Illinois Community for Displaced "
-        "Immigrants (ICDI), where he led strategic planning, fundraising, organizational development, "
-        "and statewide advocacy initiatives. He played an important role in campaigns supporting "
-        "immigrant rights, including advocacy efforts surrounding the Illinois Way Forward Act, "
-        "legislation that ended local government contracts for immigrant detention in Illinois."
-    )
-    st.write(
-        "Today he serves as Director of Program Housing at Bridge Communities, where he continues "
-        "advancing housing stability and long-term solutions for vulnerable populations."
-    )
-    st.write(
-        "As founder of Caged Dreams, Johannes combines storytelling, research, policy, and community "
-        "engagement to improve mental health access and strengthen support systems for immigrant "
-        "communities."
-    )
+
+    bio_col1, bio_col2 = st.columns([2, 1])
+    with bio_col1:
+        st.write(
+            "Johannes Favi is a strategic consultant, nonprofit executive, human rights advocate, and "
+            "community leader dedicated to building stronger systems that expand opportunity for "
+            "underserved communities."
+        )
+        st.write(
+            "His work spans immigration, housing, workforce development, nonprofit leadership, "
+            "organizational strategy, public policy, and community engagement."
+        )
+        st.write(
+            "Johannes previously served as Deputy Director of the Illinois Community for Displaced "
+            "Immigrants (ICDI), where he led strategic planning, fundraising, organizational development, "
+            "and statewide advocacy initiatives. He played an important role in campaigns supporting "
+            "immigrant rights, including advocacy efforts surrounding the Illinois Way Forward Act, "
+            "legislation that ended local government contracts for immigrant detention in Illinois."
+        )
+        st.write(
+            "Today he serves as Director of Program Housing at Bridge Communities, where he continues "
+            "advancing housing stability and long-term solutions for vulnerable populations."
+        )
+        st.write(
+            "As founder of Caged Dreams, Johannes combines storytelling, research, policy, and community "
+            "engagement to improve mental health access and strengthen support systems for immigrant "
+            "communities."
+        )
+    with bio_col2:
+        st.image("assets/johannes-favi-about.jpg", use_container_width=True)
 
     st.markdown("<div class='divider'></div>", unsafe_allow_html=True)
 
@@ -1763,6 +1768,7 @@ elif st.session_state.page == "Impact":
         "focus remains the same: creating practical, people-centered solutions that produce lasting "
         "impact."
     )
+    st.image("assets/johannes-favi-impact.jpg", use_container_width=True)
 
     st.markdown("<div class='divider'></div>", unsafe_allow_html=True)
 
