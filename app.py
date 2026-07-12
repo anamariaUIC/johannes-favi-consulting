@@ -153,13 +153,14 @@ st.markdown(
         .cta-strip {
             background: var(--navy);
             border-radius: 14px;
-            padding: 3rem;
+            padding: 2rem 3rem;
             text-align: center;
             color: #ffffff;
             margin-top: 2.5rem;
+            margin-bottom: 1.4rem;
         }
-        .cta-strip h2 { color: #ffffff; }
-        .cta-strip p { color: #d7dce5; margin-bottom: 1.5rem; }
+        .cta-strip h2 { color: #ffffff; margin-bottom: 0.6rem; }
+        .cta-strip p { color: #d7dce5; margin-bottom: 0; }
 
         /* Buttons */
         div.stButton > button, div.stLinkButton > a {
@@ -577,6 +578,7 @@ elif st.session_state.page == "Advisory":
         "that need strategic guidance and steady leadership, whether navigating a specific "
         "initiative or building longer-term institutional capacity."
     )
+    st.image("assets/johannes-favi-advisory.jpg", use_container_width=True)
     st.markdown(
         "<div class='card'><h4>Engagement Models</h4><p>Ongoing strategic advisory, fractional "
         "executive leadership, and project-based consulting for foundations, nonprofits, "
