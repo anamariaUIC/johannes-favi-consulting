@@ -719,13 +719,6 @@ elif st.session_state.page == "Contact":
         components.html(contact_form_html, height=400, scrolling=False)
         st.markdown("</div>", unsafe_allow_html=True)
 
-    st.caption(
-        "Note: the first message sent from a given URL triggers a one-time confirmation email "
-        f"from FormSubmit to {CONTACT_EMAIL}; it must be confirmed once (check spam/promotions "
-        "too) before messages start arriving normally. This applies separately to localhost and "
-        "to your deployed site, since FormSubmit ties activation to the sending domain."
-    )
-
 # ----------------------------------------------------------------------------
 # FOOTER
 # ----------------------------------------------------------------------------
