@@ -45,6 +45,40 @@ ORG_LOGOS = [
     ("assets/logos/logo-clg.png", "Catholic Lawyers Guild of Chicago"),
     ("assets/logos/logo-harris.png", "University of Chicago Harris School of Public Policy"),
     ("assets/logos/logo-healing-horizons.png", "Healing Horizons"),
+    # Government
+    ("assets/logos/logo-governor-illinois.png", "Office of the Governor of Illinois"),
+    ("assets/logos/logo-idhr.png", "Illinois Department of Human Rights"),
+    ("assets/logos/logo-congressman-garcia.png", "Office of Congressman Jes\u00fas \u201cChuy\u201d Garc\u00eda"),
+    ("assets/logos/logo-city-of-chicago.png", "City of Chicago"),
+    ("assets/logos/logo-cook-county.png", "Cook County Government"),
+    ("assets/logos/logo-dupage-county.png", "DuPage County Government"),
+    ("assets/logos/logo-ihda.png", "Illinois Housing Development Authority"),
+    # Nonprofits
+    ("assets/logos/logo-uao.png", "United African Organization"),
+    ("assets/logos/logo-chicago-refugee-coalition.png", "Chicago Refugee Coalition"),
+    ("assets/logos/logo-icirr.png", "ICIRR"),
+    ("assets/logos/logo-new-american-leaders.png", "New American Leaders"),
+    ("assets/logos/logo-change-collective.png", "Change Collective"),
+    ("assets/logos/logo-dupage-pads.png", "DuPage PADS"),
+    ("assets/logos/logo-refugeeone.png", "RefugeeOne"),
+    ("assets/logos/logo-resurrection-project.png", "The Resurrection Project"),
+    ("assets/logos/logo-centro-romero.png", "Centro Romero"),
+    ("assets/logos/logo-ascend-justice.png", "Ascend Justice"),
+    ("assets/logos/logo-community-renewal-society.png", "Community Renewal Society"),
+    # Healthcare
+    ("assets/logos/logo-coalition-immigrant-mental-health.png", "Coalition for Immigrant Mental Health"),
+    # Foundations
+    ("assets/logos/logo-chicago-community-trust.png", "Chicago Community Trust"),
+    ("assets/logos/logo-macarthur-foundation.png", "MacArthur Foundation"),
+    ("assets/logos/logo-walder-foundation.png", "Walder Foundation"),
+    ("assets/logos/logo-phalarope.png", "Phalarope Foundation"),
+    ("assets/logos/logo-odyssey-impact.png", "Odyssey Impact"),
+    # Faith Communities
+    ("assets/logos/logo-crln.png", "Chicago Religious Leadership Network"),
+    ("assets/logos/logo-darst-center.png", "Darst Center"),
+    ("assets/logos/logo-viator-house.png", "Viator House of Hospitality"),
+    ("assets/logos/logo-elmhurst-presbyterian.png", "Elmhurst Presbyterian Church"),
+    ("assets/logos/logo-wellington-ucc.png", "Wellington UCC"),
 ]
 ORG_LOGO_URIS = [(_img_to_data_uri(path), alt) for path, alt in ORG_LOGOS]
 ORG_LOGO_URI_MAP = {alt: uri for uri, alt in ORG_LOGO_URIS}
@@ -272,8 +306,10 @@ st.markdown(
             border-radius: 12px;
         }
         .logo-strip img {
-            height: 34px;
+            max-height: 36px;
+            max-width: 110px;
             width: auto;
+            height: auto;
             object-fit: contain;
         }
 
@@ -625,7 +661,8 @@ st.markdown(
                 padding: 1.2rem 0.8rem;
             }
             .logo-strip img {
-                height: 26px;
+                max-height: 26px;
+                max-width: 84px;
             }
             .card {
                 padding: 1.1rem 1.2rem;
