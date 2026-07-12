@@ -224,13 +224,6 @@ def go_to(page_name: str):
 st.markdown(
     """
     <style>
-        .st-key-brand_photo img {
-            border-radius: 50%;
-            width: 56px;
-            height: 56px;
-            object-fit: cover;
-            object-position: center 20%;
-        }
         .st-key-nav_bar button {
             background: transparent !important;
             color: #10233f !important;
@@ -253,23 +246,30 @@ st.markdown(
             padding: 0.3rem 0.2rem 0.6rem 0.2rem;
             display: inline-block;
         }
+        .brand-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.1rem;
+            font-weight: 700;
+            color: #10233f;
+            line-height: 1.15;
+        }
+        .brand-subtitle {
+            font-size: 0.95rem;
+            color: #6b7280;
+            letter-spacing: 0.5px;
+        }
     </style>
     """,
     unsafe_allow_html=True,
 )
 
-brand_col1, brand_col2 = st.columns([1, 8])
-with brand_col1:
-    with st.container(key="brand_photo"):
-        st.image("assets/johannes-favi-headshot.jpg", width=56)
-with brand_col2:
-    st.markdown(
-        "<div style='padding-top:2px;'>"
-        "<div style='font-family:Playfair Display, serif;font-size:1.4rem;font-weight:700;color:#10233f;line-height:1.1;'>Johannes Favi</div>"
-        "<div style='font-size:0.78rem;color:#6b7280;'>Strategic Consulting</div>"
-        "</div>",
-        unsafe_allow_html=True,
-    )
+st.markdown(
+    "<div style='padding:0.3rem 0 0.6rem 0;'>"
+    "<div class='brand-name'>Johannes Favi</div>"
+    "<div class='brand-subtitle'>Strategic Consulting</div>"
+    "</div>",
+    unsafe_allow_html=True,
+)
 
 with st.container(key="nav_bar"):
     nav_cols = st.columns(len(PAGES))
