@@ -229,6 +229,104 @@ st.markdown(
             margin-bottom: 0.8rem;
         }
 
+        .testimonial-card {
+            background: var(--off-white);
+            border: 1px solid #eae6dd;
+            border-radius: 10px;
+            padding: 1.4rem 1.5rem;
+            margin-bottom: 0.8rem;
+            height: 100%;
+        }
+        .testimonial-card .quote-mark {
+            color: var(--gold);
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            line-height: 1;
+        }
+        .testimonial-card .quote-text {
+            color: var(--gray);
+            font-style: italic;
+            font-size: 0.92rem;
+            margin: 0.3rem 0 0.7rem 0;
+        }
+        .testimonial-card .quote-attribution {
+            color: var(--navy);
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        /* Timeline */
+        .timeline-row {
+            display: flex;
+            gap: 1.2rem;
+            margin-bottom: 1.1rem;
+        }
+        .timeline-year {
+            flex: 0 0 90px;
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            color: var(--gold);
+            font-size: 1.15rem;
+            padding-top: 0.1rem;
+        }
+        .timeline-items {
+            flex: 1;
+            border-left: 2px solid #eae6dd;
+            padding-left: 1.1rem;
+        }
+        .timeline-items div {
+            color: var(--navy);
+            font-size: 0.94rem;
+            padding: 0.15rem 0;
+        }
+
+        /* Speaking engagements table */
+        .speak-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+        .speak-table th {
+            text-align: left;
+            color: var(--gold);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.72rem;
+            font-weight: 600;
+            padding: 0.5rem 0.6rem;
+            border-bottom: 2px solid #eae6dd;
+        }
+        .speak-table td {
+            padding: 0.6rem 0.6rem;
+            border-bottom: 1px solid #f0ede5;
+            color: var(--navy);
+        }
+        .speak-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* Who I Work With category cards */
+        .category-card {
+            background: var(--off-white);
+            border: 1px solid #eae6dd;
+            border-radius: 10px;
+            padding: 1.1rem 1.2rem;
+            margin-bottom: 0.7rem;
+            height: 100%;
+        }
+        .category-card h4 {
+            color: var(--navy);
+            font-size: 0.98rem;
+            margin-bottom: 0.4rem;
+        }
+        .category-card p {
+            color: var(--gray);
+            font-size: 0.86rem;
+            margin: 0;
+            line-height: 1.5;
+        }
+
         .cta-strip {
             background: var(--navy);
             border-radius: 14px;
@@ -372,7 +470,7 @@ st.markdown(
 # ----------------------------------------------------------------------------
 # NAVIGATION
 # ----------------------------------------------------------------------------
-PAGES = ["Home", "About", "Services", "Speaking", "Advisory", "Media", "Testimonials", "Contact"]
+PAGES = ["Home", "About", "Services", "Speaking", "Advisory", "Media", "Impact", "Testimonials", "Contact"]
 if "page" not in st.session_state:
     st.session_state.page = "Home"
 
@@ -511,6 +609,57 @@ RECOGNITION = [
 
 SCREENINGS = ["University of Chicago", "UIC", "DePaul", "Princeton", "Boston University", "Maine Film Center"]
 
+CURRENT_ROLES = [
+    ("Founder & CEO", "Caged Dreams"),
+    ("Director of Program Housing", "Bridge Communities"),
+    ("Board Member", "Interfaith Community for Detained Immigrants"),
+    ("Member", "Chicago New Arrivals Cabinet"),
+]
+
+PREVIOUS_ROLES = [
+    ("Deputy Director", "Illinois Community for Displaced Immigrants"),
+    ("Freedom Fellow", "Detention Watch Network"),
+]
+
+WHO_I_WORK_WITH = {
+    "Government": ["City of Chicago agencies", "State of Illinois offices", "County government partners"],
+    "Universities": ["University of Chicago", "University of Illinois Chicago", "DePaul University"],
+    "Nonprofits": ["Bridge Communities", "Illinois Community for Displaced Immigrants", "Detention Watch Network"],
+    "Foundations": ["Regional and national grantmaking foundations"],
+    "Healthcare Organizations": ["Community and behavioral health providers"],
+    "Faith Communities": ["Chicago Religious Leadership Network", "Interfaith Community for Detained Immigrants"],
+    "Employers": ["Employers seeking immigration and workforce integration guidance"],
+}
+
+SPEAKING_ENGAGEMENTS = [
+    ("2025", "DePaul University", "Caged Dreams Discussion"),
+    ("2024", "University of Chicago", "Chicago Style"),
+    ("2024", "University of Illinois Chicago", "Civic Cinema"),
+    ("2024", "African Studies Association", "Annual Meeting"),
+    ("2024", "DuPage Immigrant Integration Forum", "Featured Speaker"),
+    ("2023", "DePaul University", "Sanctuary Panel"),
+    ("2020", "U.S. House Judiciary Committee", "Congressional Testimony"),
+]
+
+TIMELINE = [
+    ("2019", ["Immigration detention experience"]),
+    ("2020", ["Congressional testimony", "National advocacy"]),
+    ("2021", ["Illinois Way Forward advocacy", "Jeanne & Joseph Sullivan Human Rights Award"]),
+    ("2022", ["Chicago migrant response leadership"]),
+    ("2023", ["Caged Dreams documentary", "Founder of Caged Dreams", "Chicago New Arrivals Cabinet"]),
+    ("2024", ["Civic Leadership Academy", "University speaking tour", "Catholic Lawyers Guild Special Service Award"]),
+    ("2025 to 2026", ["Bridge Communities", "Chicago Council Emerging Leader", "Housing and policy consulting"]),
+]
+
+IMPACT_AREAS = [
+    ("Policy Change", "Contributions to advocacy surrounding the Illinois Way Forward Act."),
+    ("Public Leadership", "Testimony before the U.S. House Judiciary Committee."),
+    ("Housing Systems", "Leadership in housing strategy and support for vulnerable populations."),
+    ("Mental Health", "Creation of Caged Dreams and related advocacy."),
+    ("Public Education", "University lectures, documentary screenings, and conference presentations."),
+    ("Community Building", "Cross-sector partnerships with nonprofits, universities, and government agencies."),
+]
+
 TESTIMONIAL_CATEGORIES = [
     ("Government", 2),
     ("Nonprofit", 2),
@@ -568,6 +717,20 @@ if st.session_state.page == "Home":
 
     st.markdown("<div class='divider'></div>", unsafe_allow_html=True)
 
+    # ---- Current Leadership ----
+    st.markdown("<div class='section-label'>Current Leadership</div>", unsafe_allow_html=True)
+    st.markdown("<div class='section-title'>What Johannes Is Doing Now</div>", unsafe_allow_html=True)
+    cl_cols = st.columns(2)
+    for i, (role, org) in enumerate(CURRENT_ROLES):
+        with cl_cols[i % 2]:
+            st.markdown(
+                f"<div class='card' style='margin-bottom:0.6rem;'><h4 style='margin-bottom:0.15rem;'>{role}</h4>"
+                f"<p>{org}</p></div>",
+                unsafe_allow_html=True,
+            )
+
+    st.markdown("<div class='divider'></div>", unsafe_allow_html=True)
+
     # ---- Featured Expertise ----
     st.markdown("<div class='section-label'>Featured Expertise</div>", unsafe_allow_html=True)
     st.markdown("<div class='section-title'>Where I Add the Most Value</div>", unsafe_allow_html=True)
@@ -612,6 +775,23 @@ if st.session_state.page == "Home":
     st.markdown("<div class='divider'></div>", unsafe_allow_html=True)
 
     # ---- Featured Project: Caged Dreams ----
+    fp_img_col1, fp_img_col2, fp_img_col3 = st.columns([1, 1.1, 1])
+    with fp_img_col2:
+        st.markdown(
+            """
+            <style>
+                .st-key-home_flyer_wrap img {
+                    border-radius: 10px;
+                    box-shadow: 0 14px 32px rgba(16, 35, 63, 0.28);
+                }
+            </style>
+            """,
+            unsafe_allow_html=True,
+        )
+        with st.container(key="home_flyer_wrap"):
+            st.image("assets/caged-dreams-flyer.jpg", use_container_width=True)
+
+    st.write("")
     st.markdown(
         """
         <div class="featured-project">
@@ -676,7 +856,11 @@ if st.session_state.page == "Home":
     for i in range(3):
         with t_cols[i]:
             st.markdown(
-                f"<div class='placeholder-card'>Testimonial {i + 1}<br><em>Coming soon</em></div>",
+                "<div class='testimonial-card'>"
+                "<div class='quote-mark'>&ldquo;</div>"
+                f"<div class='quote-text'>Coming soon.</div>"
+                f"<div class='quote-attribution'>Testimonial {i + 1}</div>"
+                "</div>",
                 unsafe_allow_html=True,
             )
     if st.button("See All Testimonials", key="home_see_testimonials"):
@@ -737,14 +921,8 @@ elif st.session_state.page == "About":
     st.markdown("<div class='section-title'>Current & Previous Roles</div>", unsafe_allow_html=True)
 
     st.markdown("<h4 style='color:#10233f;margin-bottom:0.6rem;'>Current</h4>", unsafe_allow_html=True)
-    current_roles = [
-        ("Founder & CEO", "Caged Dreams"),
-        ("Director of Program Housing", "Bridge Communities"),
-        ("Board Member", "Interfaith Community for Detained Immigrants"),
-        ("Member", "Chicago New Arrivals Cabinet"),
-    ]
     cur_cols = st.columns(2)
-    for i, (role, org) in enumerate(current_roles):
+    for i, (role, org) in enumerate(CURRENT_ROLES):
         with cur_cols[i % 2]:
             st.markdown(
                 f"<div class='card' style='margin-bottom:0.6rem;'><h4 style='margin-bottom:0.15rem;'>{role}</h4>"
@@ -753,18 +931,27 @@ elif st.session_state.page == "About":
             )
 
     st.markdown("<h4 style='color:#10233f;margin:1rem 0 0.6rem 0;'>Previous</h4>", unsafe_allow_html=True)
-    previous_roles = [
-        ("Deputy Director", "Illinois Community for Displaced Immigrants"),
-        ("Freedom Fellow", "Detention Watch Network"),
-    ]
     prev_cols = st.columns(2)
-    for i, (role, org) in enumerate(previous_roles):
+    for i, (role, org) in enumerate(PREVIOUS_ROLES):
         with prev_cols[i % 2]:
             st.markdown(
                 f"<div class='card' style='margin-bottom:0.6rem;'><h4 style='margin-bottom:0.15rem;'>{role}</h4>"
                 f"<p>{org}</p></div>",
                 unsafe_allow_html=True,
             )
+
+    st.markdown("<div class='divider'></div>", unsafe_allow_html=True)
+
+    # ---- Timeline ----
+    st.markdown("<div class='section-label'>Journey</div>", unsafe_allow_html=True)
+    st.markdown("<div class='section-title'>Timeline</div>", unsafe_allow_html=True)
+    for year, items in TIMELINE:
+        items_html = "".join(f"<div>{item}</div>" for item in items)
+        st.markdown(
+            f"<div class='timeline-row'><div class='timeline-year'>{year}</div>"
+            f"<div class='timeline-items'>{items_html}</div></div>",
+            unsafe_allow_html=True,
+        )
 
     st.markdown("<div class='divider'></div>", unsafe_allow_html=True)
 
@@ -777,6 +964,20 @@ elif st.session_state.page == "About":
             f"<p>{desc}</p></div>",
             unsafe_allow_html=True,
         )
+
+    st.markdown("<div class='divider'></div>", unsafe_allow_html=True)
+
+    # ---- Who I Work With ----
+    st.markdown("<div class='section-label'>Who I Work With</div>", unsafe_allow_html=True)
+    st.markdown("<div class='section-title'>Partners by Sector</div>", unsafe_allow_html=True)
+    wiww_items = list(WHO_I_WORK_WITH.items())
+    wiww_cols = st.columns(2)
+    for i, (category, examples) in enumerate(wiww_items):
+        with wiww_cols[i % 2]:
+            st.markdown(
+                f"<div class='category-card'><h4>{category}</h4><p>{', '.join(examples)}</p></div>",
+                unsafe_allow_html=True,
+            )
 
     st.markdown("<div class='divider'></div>", unsafe_allow_html=True)
 
@@ -843,6 +1044,7 @@ elif st.session_state.page == "About":
     )
 
     st.markdown("<div class='divider'></div>", unsafe_allow_html=True)
+    st.write("**Interested in working together? Schedule a consultation.**")
     col1, col2 = st.columns(2)
     with col1:
         if st.button("Discuss Your Project", key="about_cta1", use_container_width=True):
@@ -891,6 +1093,7 @@ elif st.session_state.page == "Services":
             )
 
     st.markdown("<div class='divider'></div>", unsafe_allow_html=True)
+    st.write("**Need strategic guidance? Book a discovery call.**")
     col1, col2 = st.columns(2)
     with col1:
         if st.button("Discuss Your Project", key="services_cta1", use_container_width=True):
@@ -937,6 +1140,24 @@ elif st.session_state.page == "Speaking":
     )
 
     st.markdown("<div class='divider'></div>", unsafe_allow_html=True)
+
+    st.markdown("<div class='section-label'>Selected Speaking Engagements</div>", unsafe_allow_html=True)
+    rows_html = "".join(
+        f"<tr><td>{year}</td><td>{org}</td><td>{event}</td></tr>"
+        for year, org, event in SPEAKING_ENGAGEMENTS
+    )
+    st.markdown(
+        f"""
+        <table class="speak-table">
+            <thead><tr><th>Year</th><th>Organization</th><th>Event</th></tr></thead>
+            <tbody>{rows_html}</tbody>
+        </table>
+        """,
+        unsafe_allow_html=True,
+    )
+
+    st.markdown("<div class='divider'></div>", unsafe_allow_html=True)
+    st.write("**Planning a conference or leadership retreat? Let's talk.**")
     st.link_button("Inquire About Speaking", f"mailto:{CONTACT_EMAIL}?subject=Speaking%20Inquiry")
 
 # ----------------------------------------------------------------------------
@@ -1017,6 +1238,35 @@ elif st.session_state.page == "Media":
         unsafe_allow_html=True,
     )
 
+    st.markdown("<div class='divider'></div>", unsafe_allow_html=True)
+    st.write("**Looking for an expert source or speaker? Get in touch.**")
+    if st.button("Contact Me", key="media_cta1"):
+        go_to("Contact")
+        st.rerun()
+
+# ----------------------------------------------------------------------------
+# IMPACT
+# ----------------------------------------------------------------------------
+elif st.session_state.page == "Impact":
+    st.markdown("<div class='section-label'>Impact</div>", unsafe_allow_html=True)
+    st.markdown("<div class='section-title'>Outcomes, Not Just Activities</div>", unsafe_allow_html=True)
+    st.write(
+        "Many consultants describe what they do. Fewer clearly demonstrate the change their work "
+        "has produced. Johannes' work is organized here around the outcomes it has helped create."
+    )
+
+    for title, desc in IMPACT_AREAS:
+        st.markdown(
+            f"<div class='card' style='margin-bottom:0.8rem;'><h4>{title}</h4><p>{desc}</p></div>",
+            unsafe_allow_html=True,
+        )
+
+    st.markdown("<div class='divider'></div>", unsafe_allow_html=True)
+    st.write("**Want to discuss the outcomes your organization needs? Let's connect.**")
+    if st.button("Schedule a Consultation", key="impact_cta1"):
+        go_to("Contact")
+        st.rerun()
+
 # ----------------------------------------------------------------------------
 # TESTIMONIALS
 # ----------------------------------------------------------------------------
@@ -1035,7 +1285,11 @@ elif st.session_state.page == "Testimonials":
         for i in range(count):
             with t_cols[i]:
                 st.markdown(
-                    f"<div class='placeholder-card'>Testimonial {counter}<br><em>Coming soon</em></div>",
+                    "<div class='testimonial-card'>"
+                    "<div class='quote-mark'>&ldquo;</div>"
+                    "<div class='quote-text'>Coming soon.</div>"
+                    f"<div class='quote-attribution'>Testimonial {counter}</div>"
+                    "</div>",
                     unsafe_allow_html=True,
                 )
             counter += 1
