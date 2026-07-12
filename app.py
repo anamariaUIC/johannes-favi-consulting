@@ -15,8 +15,8 @@ st.set_page_config(
 CONTACT_EMAIL = "contactcageddreams@gmail.com"
 
 # TODO: replace these placeholders with the real Caged Dreams links once available.
-CAGED_DREAMS_URL = "#"
-CAGED_DREAMS_TRAILER_URL = "#"
+CAGED_DREAMS_URL = "https://cageddreams.com/"
+CAGED_DREAMS_FILM_URL = "https://www.youtube.com/watch?v=9tPgUSNf22Y"
 DISCUSSION_GUIDE_URL = "#"
 
 
@@ -389,7 +389,7 @@ st.markdown(
 # ----------------------------------------------------------------------------
 # NAVIGATION
 # ----------------------------------------------------------------------------
-PAGES = ["Home", "About", "Services", "Speaking", "Advisory", "Media", "Resources", "Testimonials", "Contact"]
+PAGES = ["Home", "About", "Services", "Speaking", "Advisory", "Media", "Testimonials", "Contact"]
 if "page" not in st.session_state:
     st.session_state.page = "Home"
 
@@ -647,7 +647,7 @@ if st.session_state.page == "Home":
     with fp_col1:
         st.link_button("Visit Caged Dreams", CAGED_DREAMS_URL, use_container_width=True)
     with fp_col2:
-        st.link_button("Watch Trailer", CAGED_DREAMS_TRAILER_URL, use_container_width=True)
+        st.link_button("Watch Full Film", CAGED_DREAMS_FILM_URL, use_container_width=True)
     with fp_col3:
         if st.button("Learn More", key="home_learn_more", use_container_width=True):
             go_to("Media")
@@ -988,7 +988,7 @@ elif st.session_state.page == "Media":
 
     trailer_col1, trailer_col2 = st.columns(2)
     with trailer_col1:
-        st.link_button("Watch Trailer", CAGED_DREAMS_TRAILER_URL, use_container_width=True)
+        st.link_button("Watch Full Film", CAGED_DREAMS_FILM_URL, use_container_width=True)
     with trailer_col2:
         st.link_button("Visit Caged Dreams", CAGED_DREAMS_URL, use_container_width=True)
 
@@ -1028,31 +1028,6 @@ elif st.session_state.page == "Media":
     st.markdown("<div class='section-label'>Discussion Guide</div>", unsafe_allow_html=True)
     st.write("A discussion guide for community screenings, classrooms, and organizing groups.")
     st.link_button("Download Discussion Guide", DISCUSSION_GUIDE_URL)
-
-# ----------------------------------------------------------------------------
-# RESOURCES
-# ----------------------------------------------------------------------------
-elif st.session_state.page == "Resources":
-    st.markdown("<div class='section-label'>Resources</div>", unsafe_allow_html=True)
-    st.markdown("<div class='section-title'>Articles, Reports & Downloads</div>", unsafe_allow_html=True)
-    st.write(
-        "A growing library of writing and research on immigration policy, housing, and community "
-        "leadership. Check back soon for new additions."
-    )
-
-    resource_sections = [
-        ("LinkedIn Articles", "Selected essays and commentary, republished here as they are added."),
-        ("Policy Papers", "Policy analysis and briefs on immigration, housing, and workforce systems."),
-        ("Reports", "Research reports and task force findings, including collaborative publications."),
-        ("Videos", "Talks, panels, and interviews, added as recordings become available."),
-        ("Downloads", "Guides, fact sheets, and other materials available for download."),
-    ]
-    for title, desc in resource_sections:
-        st.markdown(f"<div class='section-label' style='margin-top:1.2rem;'>{title}</div>", unsafe_allow_html=True)
-        st.markdown(
-            f"<div class='placeholder-card'>{desc}<br><em>Coming soon</em></div>",
-            unsafe_allow_html=True,
-        )
 
 # ----------------------------------------------------------------------------
 # TESTIMONIALS
