@@ -287,6 +287,11 @@ st.markdown(
             font-size: 0.85rem;
             font-weight: 600;
         }
+        .testimonial-card .quote-role {
+            color: var(--gray);
+            font-size: 0.8rem;
+            margin-top: 0.1rem;
+        }
 
         /* Timeline */
         .timeline-row {
@@ -700,12 +705,53 @@ IMPACT_AREAS = [
     ("Community Building", "Cross-sector partnerships with nonprofits, universities, and government agencies."),
 ]
 
-TESTIMONIAL_CATEGORIES = [
-    ("Government", 2),
-    ("Nonprofit", 2),
-    ("Academic", 2),
-    ("Speaking Engagements", 1),
-]
+TESTIMONIALS = {
+    "Government": [
+        (
+            "Johannes has a unique skill for facilitating connection and will continue to be a force for positive change.",
+            "Jim Bennett",
+            "Director, Illinois Department of Human Rights; Chair, Black Immigration Task Force",
+        ),
+        (
+            "Johannes is a trusted leader whose character and commitment to others make a meaningful impact.",
+            "Dr. Ariel G. Schwartz",
+            "Executive Director, Global Leadership Programs, Chicago Council on Global Affairs",
+        ),
+    ],
+    "Nonprofit": [
+        (
+            "Thank you for the contagious energy and valuable insights you shared. The way you connected "
+            "with attendees made the symposium truly engaging.",
+            "DePaul Migration Collaborative",
+            "DePaul University",
+        ),
+        (
+            "Johannes' story and advocacy work were incredibly powerful. Students left deeply inspired by his work.",
+            "Sarah Sherman-Stokes",
+            "Associate Director, Immigrants' Rights & Human Trafficking Program, Boston University School of Law",
+        ),
+    ],
+    "Academic": [
+        (
+            "Students left curious and inspired after hearing your experiences in public service.",
+            "Milvia Rodriguez",
+            "Executive Program Director, University of Chicago Harris School of Public Policy",
+        ),
+        (
+            "Your willingness to share your experiences and invest in students left a lasting impression on me.",
+            "Jessica Perez",
+            "Economics Honors & Political Science Graduate, DePaul University",
+        ),
+    ],
+    "Speaking Engagements": [
+        (
+            "Your testimony and thoughtful presentation made a meaningful impact, and our attendees truly "
+            "appreciated your contributions.",
+            "Anne Lawrence",
+            "DEIB Director-Elect, Junior League of Chicago",
+        ),
+    ],
+}
 
 # ----------------------------------------------------------------------------
 # HOME
@@ -898,14 +944,16 @@ if st.session_state.page == "Home":
     # ---- Testimonials preview ----
     st.markdown("<div class='section-label'>Testimonials</div>", unsafe_allow_html=True)
     st.markdown("<div class='section-title'>What Collaborators Say</div>", unsafe_allow_html=True)
+    preview_testimonials = [entries[0] for entries in TESTIMONIALS.values()][:3]
     t_cols = st.columns(3)
-    for i in range(3):
+    for i, (quote, name, role) in enumerate(preview_testimonials):
         with t_cols[i]:
             st.markdown(
                 "<div class='testimonial-card'>"
                 "<div class='quote-mark'>&ldquo;</div>"
-                f"<div class='quote-text'>Coming soon.</div>"
-                f"<div class='quote-attribution'>Testimonial {i + 1}</div>"
+                f"<div class='quote-text'>{quote}</div>"
+                f"<div class='quote-attribution'>{name}</div>"
+                f"<div class='quote-role'>{role}</div>"
                 "</div>",
                 unsafe_allow_html=True,
             )
@@ -1326,24 +1374,23 @@ elif st.session_state.page == "Testimonials":
     st.markdown("<div class='section-title'>What Collaborators Say</div>", unsafe_allow_html=True)
     st.write(
         "Endorsements from university faculty, nonprofit leaders, government officials, "
-        "collaborators, and conference organizers will be added here as they are collected."
+        "collaborators, and conference organizers."
     )
 
-    counter = 1
-    for category, count in TESTIMONIAL_CATEGORIES:
+    for category, entries in TESTIMONIALS.items():
         st.markdown(f"<div class='section-label' style='margin-top:1.4rem;'>{category}</div>", unsafe_allow_html=True)
-        t_cols = st.columns(count if count > 1 else 1)
-        for i in range(count):
+        t_cols = st.columns(len(entries) if len(entries) > 1 else 1)
+        for i, (quote, name, role) in enumerate(entries):
             with t_cols[i]:
                 st.markdown(
                     "<div class='testimonial-card'>"
                     "<div class='quote-mark'>&ldquo;</div>"
-                    "<div class='quote-text'>Coming soon.</div>"
-                    f"<div class='quote-attribution'>Testimonial {counter}</div>"
+                    f"<div class='quote-text'>{quote}</div>"
+                    f"<div class='quote-attribution'>{name}</div>"
+                    f"<div class='quote-role'>{role}</div>"
                     "</div>",
                     unsafe_allow_html=True,
                 )
-            counter += 1
 
 # ----------------------------------------------------------------------------
 # CONTACT
