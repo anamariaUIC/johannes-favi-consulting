@@ -16,6 +16,10 @@ CONTACT_EMAIL = "contactcageddreams@gmail.com"
 
 CAGED_DREAMS_URL = "https://cageddreams.com/"
 CAGED_DREAMS_FILM_URL = "https://www.youtube.com/watch?v=9tPgUSNf22Y"
+TASK_FORCE_REPORT_URL = (
+    "https://www.ilga.gov/Documents/Reports/ReportsSubmitted/"
+    "6390RSGAEmail14131RSGAAttachReport%20of%20the%20Task%20Force%20on%20Black%20Immigrants_12-29-2025.pdf"
+)
 
 
 def _img_to_data_uri(path: str) -> str:
@@ -131,6 +135,38 @@ st.markdown(
             color: #e6e9ef;
             max-width: 720px;
             line-height: 1.7;
+        }
+        .hero-badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1.1rem;
+        }
+        .hero-badge {
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.25);
+            color: #f2ede1;
+            font-size: 0.8rem;
+            font-weight: 500;
+            padding: 0.35rem 0.8rem;
+            border-radius: 20px;
+        }
+
+        /* Checklist */
+        .checklist {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem 1.6rem;
+            margin: 0.6rem 0 0.4rem 0;
+        }
+        .checklist-item {
+            color: var(--navy);
+            font-size: 0.92rem;
+        }
+        .checklist-item .check {
+            color: var(--gold);
+            font-weight: 700;
+            margin-right: 0.35rem;
         }
 
         /* Credibility strip */
@@ -647,9 +683,15 @@ st.markdown("<div class='divider' style='margin-top:0.5rem;'></div>", unsafe_all
 RECOGNITION = [
     ("Jeanne & Joseph Sullivan Human Rights Award", "Awarded for leadership advancing immigrant rights and human dignity."),
     ("Special Service Award, Catholic Lawyers Guild of Chicago", "Recognizing outstanding service to immigrant communities."),
+    ("Illinois Task Force on Black Immigrants", "Appointed member of the statewide advisory body established by the Illinois General Assembly."),
     ("Chicago City Council Recognition", "Recognized during National Hispanic Heritage Month by Alderman Andre Vasquez."),
     ("Freedom Fellow, Detention Watch Network", "National leadership fellowship advancing alternatives to immigration detention."),
     ("Chicago Council Emerging Leader", "Civic Leadership Academy, University of Chicago Harris School of Public Policy."),
+]
+
+TASK_FORCE_AREAS = [
+    "Housing", "Workforce Development", "Education", "Healthcare",
+    "Economic Opportunity", "Public Safety", "Civic Participation",
 ]
 
 SCREENINGS = ["University of Chicago", "UIC", "DePaul", "Princeton", "Boston University", "Maine Film Center"]
@@ -693,7 +735,15 @@ TIMELINE = [
     ("2022", ["Chicago migrant response leadership"]),
     ("2023", ["Caged Dreams documentary", "Founder of Caged Dreams", "Chicago New Arrivals Cabinet"]),
     ("2024", ["Civic Leadership Academy", "University speaking tour", "Catholic Lawyers Guild Special Service Award"]),
-    ("2025 to 2026", ["Bridge Communities", "Chicago Council Emerging Leader", "Housing and policy consulting"]),
+    (
+        "2025 to 2026",
+        [
+            "Director of Program Housing, Bridge Communities",
+            "Selected to serve on the Illinois Task Force on Black Immigrants",
+            "Contributed to statewide policy recommendations",
+            "Chicago Council Emerging Leader",
+        ],
+    ),
 ]
 
 IMPACT_AREAS = [
@@ -767,6 +817,12 @@ if st.session_state.page == "Home":
                     <p>Strategic consulting for governments, nonprofits, universities, healthcare systems,
                     foundations, and mission-driven organizations seeking practical, human-centered solutions
                     in immigration, housing, workforce development, organizational leadership, and public policy.</p>
+                    <div class="hero-badges">
+                        <span class="hero-badge">Founder, Caged Dreams</span>
+                        <span class="hero-badge">Director, Bridge Communities</span>
+                        <span class="hero-badge">Illinois Task Force on Black Immigrants</span>
+                        <span class="hero-badge">Congressional Witness</span>
+                    </div>
                 </div>
                 <div class="hero-photo">
                     <img src="{HERO_PHOTO_URI}" alt="Johannes Favi">
@@ -849,6 +905,7 @@ if st.session_state.page == "Home":
     st.markdown("<div class='section-title'>Selected Impact</div>", unsafe_allow_html=True)
     stats = [
         ("17+", "Years of Leadership"),
+        ("&#127963;", "Statewide Policy Leadership"),
         ("25+", "Speaking Engagements"),
         ("10+", "Universities"),
         ("6+", "Awards & Fellowships"),
@@ -914,11 +971,42 @@ if st.session_state.page == "Home":
 
     st.markdown("<div class='divider'></div>", unsafe_allow_html=True)
 
-    # ---- Recognition ----
-    st.markdown("<div class='section-label'>Recognition</div>", unsafe_allow_html=True)
+    # ---- Recognition & Public Leadership ----
+    st.markdown("<div class='section-label'>Recognition & Public Leadership</div>", unsafe_allow_html=True)
     st.markdown("<div class='section-title'>Selected Recognition</div>", unsafe_allow_html=True)
     st.markdown(
         "".join(f"<span class='tag-gold'>{title}</span>" for title, _ in RECOGNITION),
+        unsafe_allow_html=True,
+    )
+
+    st.markdown("<div class='divider'></div>", unsafe_allow_html=True)
+
+    # ---- State Policy Leadership ----
+    st.markdown("<div class='section-label'>State Policy Leadership</div>", unsafe_allow_html=True)
+    st.markdown(
+        "<div class='card'><h4>&#127482;&#127480; Illinois Task Force on Black Immigrants</h4>"
+        "<p>Johannes Favi served as a member of the Illinois Task Force on Black Immigrants, a statewide "
+        "advisory body established by the Illinois General Assembly to examine the experiences of Black "
+        "immigrants and develop policy recommendations for Illinois. As Director of Program Housing at "
+        "Bridge Communities, he contributed expertise on housing, immigrant integration, and community "
+        "development to a report addressing education, healthcare, workforce development, economic "
+        "opportunity, housing, and civic participation.</p></div>",
+        unsafe_allow_html=True,
+    )
+    st.write("")
+    spl_col1, spl_col2 = st.columns(2)
+    with spl_col1:
+        st.link_button("Read Official State Report", TASK_FORCE_REPORT_URL, use_container_width=True)
+    with spl_col2:
+        if st.button("Public Policy Services", key="home_policy_services", use_container_width=True):
+            go_to("Services")
+            st.rerun()
+
+    st.write("**Statewide Policy Leadership**")
+    st.markdown(
+        "<div class='checklist'>"
+        + "".join(f"<span class='checklist-item'><span class='check'>&#10003;</span>{a}</span>" for a in TASK_FORCE_AREAS)
+        + "</div>",
         unsafe_allow_html=True,
     )
 
@@ -1034,6 +1122,27 @@ elif st.session_state.page == "About":
                 unsafe_allow_html=True,
             )
 
+    st.markdown("<h4 style='color:#10233f;margin:1.2rem 0 0.6rem 0;'>Public Leadership</h4>", unsafe_allow_html=True)
+    st.markdown(
+        "<div class='card'><h4>Illinois Task Force on Black Immigrants</h4>"
+        "<p>Johannes served on the Illinois Task Force on Black Immigrants, established by the Illinois "
+        "General Assembly to study barriers affecting Black immigrant communities and recommend policy "
+        "solutions for state government.</p>"
+        "<p style='margin-top:0.6rem;'>Working alongside leaders from government agencies, nonprofit "
+        "organizations, universities, and community organizations, he contributed expertise in housing "
+        "systems, immigrant integration, and community development.</p></div>",
+        unsafe_allow_html=True,
+    )
+    st.write("**The Task Force's recommendations span:**")
+    st.markdown(
+        "<div class='checklist'>"
+        + "".join(f"<span class='checklist-item'><span class='check'>&#10003;</span>{a}</span>" for a in TASK_FORCE_AREAS)
+        + "</div>",
+        unsafe_allow_html=True,
+    )
+    st.write("")
+    st.link_button("Download State Report", TASK_FORCE_REPORT_URL)
+
     st.markdown("<div class='divider'></div>", unsafe_allow_html=True)
 
     # ---- Timeline ----
@@ -1049,8 +1158,8 @@ elif st.session_state.page == "About":
 
     st.markdown("<div class='divider'></div>", unsafe_allow_html=True)
 
-    # ---- Awards & Recognition ----
-    st.markdown("<div class='section-label'>Awards & Recognition</div>", unsafe_allow_html=True)
+    # ---- Recognition & Public Leadership ----
+    st.markdown("<div class='section-label'>Recognition & Public Leadership</div>", unsafe_allow_html=True)
     st.markdown("<div class='section-title'>Honors</div>", unsafe_allow_html=True)
     for title, desc in RECOGNITION:
         st.markdown(
@@ -1169,9 +1278,10 @@ elif st.session_state.page == "Services":
         ("Nonprofit Leadership & Organizational Development",
          "Helping mission-driven organizations strengthen leadership, align strategy, and build "
          "effective systems."),
-        ("Public Policy & Government Relations",
-         "Translating research into policy action through analysis, advocacy strategy, and "
-         "stakeholder engagement."),
+        ("Public Policy & Government Advisory",
+         "Advising statewide initiatives and translating community needs into practical policy "
+         "recommendations, grounded in direct experience at the intersection of policy and "
+         "implementation."),
         ("Research & Data Consulting",
          "Turning complex information into actionable insight through evaluation, reports, and "
          "data storytelling."),
@@ -1190,6 +1300,31 @@ elif st.session_state.page == "Services":
                 f"<div class='card'><h4>{title}</h4><p>{desc}</p></div>",
                 unsafe_allow_html=True,
             )
+
+    st.markdown("<div class='divider'></div>", unsafe_allow_html=True)
+
+    st.markdown("<div class='section-label'>Public Policy & Government Advisory</div>", unsafe_allow_html=True)
+    st.write(
+        "Organizations frequently seek guidance at the intersection of policy, implementation, and "
+        "community engagement. Johannes brings experience advising statewide initiatives and "
+        "translating community needs into practical policy recommendations."
+    )
+    st.write("**Selected experience includes**")
+    policy_experience = [
+        "Illinois Task Force on Black Immigrants",
+        "Illinois Way Forward advocacy",
+        "Congressional testimony",
+        "Chicago New Arrivals Cabinet",
+        "Housing systems strategy",
+    ]
+    st.markdown(
+        "<div class='checklist'>"
+        + "".join(f"<span class='checklist-item'><span class='check'>&#10003;</span>{a}</span>" for a in policy_experience)
+        + "</div>",
+        unsafe_allow_html=True,
+    )
+    st.write("")
+    st.link_button("Read State Report", TASK_FORCE_REPORT_URL)
 
     st.markdown("<div class='divider'></div>", unsafe_allow_html=True)
     st.write("**Need strategic guidance? Book a discovery call.**")
@@ -1336,6 +1471,20 @@ elif st.session_state.page == "Media":
         "".join(f"<span class='tag-gold'>{title}</span>" for title, _ in RECOGNITION),
         unsafe_allow_html=True,
     )
+
+    st.markdown("<div class='divider'></div>", unsafe_allow_html=True)
+
+    st.markdown("<div class='section-label'>Featured Government Publication</div>", unsafe_allow_html=True)
+    st.markdown(
+        "<div class='card'><h4>Illinois General Assembly</h4>"
+        "<p><strong>Report of the Task Force on Black Immigrants</strong></p>"
+        "<p style='margin-top:0.5rem;'>Johannes served as a member of the statewide task force helping "
+        "develop recommendations addressing housing, healthcare, workforce development, education, and "
+        "civic participation.</p></div>",
+        unsafe_allow_html=True,
+    )
+    st.write("")
+    st.link_button("Download Report", TASK_FORCE_REPORT_URL)
 
     st.markdown("<div class='divider'></div>", unsafe_allow_html=True)
     st.write("**Looking for an expert source or speaker? Get in touch.**")
