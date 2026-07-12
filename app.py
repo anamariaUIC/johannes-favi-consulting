@@ -428,9 +428,19 @@ with tabs[5]:
         .cf-row {{ display: flex; gap: 1rem; }}
         .cf-row > div {{ flex: 1; }}
     </style>
-    <form action="https://formsubmit.co/{CONTACT_EMAIL}" method="POST">
+        .cf-status {{
+            display: none;
+            margin-top: 0.8rem;
+            padding: 0.7rem 0.9rem;
+            border-radius: 6px;
+            font-size: 0.9rem;
+        }}
+        .cf-status.ok {{ background: #e7f4ea; color: #1e6b34; border: 1px solid #bfe3c8; }}
+        .cf-status.err {{ background: #fbeaea; color: #99281f; border: 1px solid #f0c4c1; }}
+        .cf-submit[disabled] {{ opacity: 0.6; cursor: default; }}
+    </style>
+    <form id="cf-form">
         <input type="hidden" name="_subject" value="New inquiry — Johannes Favi consulting site">
-        <input type="hidden" name="_captcha" value="false">
         <input type="hidden" name="_template" value="table">
 
         <div class="cf-row">
@@ -450,17 +460,63 @@ with tabs[5]:
         <label class="cf-label">How can I help?</label>
         <textarea class="cf-textarea" name="Message" required></textarea>
 
-        <button class="cf-submit" type="submit">Send Message</button>
+        <button class="cf-submit" type="submit" id="cf-submit-btn">Send Message</button>
+        <div class="cf-status" id="cf-status"></div>
     </form>
+
+    <script>
+        const form = document.getElementById('cf-form');
+        const btn = document.getElementById('cf-submit-btn');
+        const status = document.getElementById('cf-status');
+
+        form.addEventListener('submit', function (e) {{
+            e.preventDefault();
+            btn.disabled = true;
+            btn.textContent = 'Sending...';
+            status.style.display = 'none';
+
+            const data = new FormData(form);
+
+            fetch('https://formsubmit.co/ajax/{CONTACT_EMAIL}', {{
+                method: 'POST',
+                headers: {{ 'Accept': 'application/json' }},
+                body: data
+            }})
+            .then(function (res) {{ return res.json().then(function (json) {{ return {{ ok: res.ok, json: json }}; }}); }})
+            .then(function (result) {{
+                if (result.ok && result.json && result.json.success !== 'false') {{
+                    status.className = 'cf-status ok';
+                    status.textContent = "Message sent — thank you. I'll be in touch soon.";
+                    form.reset();
+                }} else {{
+                    status.className = 'cf-status err';
+                    status.textContent = 'Something went wrong sending this — please email '
+                        + '{CONTACT_EMAIL}' + ' directly. (' + JSON.stringify(result.json) + ')';
+                }}
+                status.style.display = 'block';
+            }})
+            .catch(function (err) {{
+                status.className = 'cf-status err';
+                status.textContent = 'Network error — please email {CONTACT_EMAIL} directly instead. (' + err + ')';
+                status.style.display = 'block';
+            }})
+            .finally(function () {{
+                btn.disabled = false;
+                btn.textContent = 'Send Message';
+            }});
+        }});
+    </script>
     """
     with st.container():
         st.markdown("<div class='contact-form-wrap'>", unsafe_allow_html=True)
-        components.html(contact_form_html, height=340, scrolling=False)
+        components.html(contact_form_html, height=400, scrolling=False)
         st.markdown("</div>", unsafe_allow_html=True)
 
     st.caption(
-        "Note: the first message sent will trigger a one-time confirmation email from FormSubmit "
-        f"to {CONTACT_EMAIL} — it must be confirmed once before messages start arriving normally."
+        "Note: the first message sent from a given URL triggers a one-time confirmation email "
+        f"from FormSubmit to {CONTACT_EMAIL} — it must be confirmed once (check spam/promotions "
+        "too) before messages start arriving normally. This applies separately to localhost and "
+        "to your deployed site, since FormSubmit ties activation to the sending domain."
     )
 
 # ----------------------------------------------------------------------------
