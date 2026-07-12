@@ -677,6 +677,33 @@ with st.container(key="nav_bar"):
 
 st.markdown("<div class='divider' style='margin-top:0.5rem;'></div>", unsafe_allow_html=True)
 
+# A real st.header element (not raw HTML) placed near the top of the page.
+# Streamlit's own search-indexability guidance notes that search engines favor
+# st.header/st.text content over markdown/HTML when generating a meta description,
+# so this doubles as an SEO-friendly summary and a visible tagline.
+st.markdown(
+    """
+    <style>
+        .st-key-seo_intro h2 {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 400;
+            color: var(--gray);
+            margin: 0 0 1.2rem 0;
+            padding: 0;
+            line-height: 1.5;
+        }
+    </style>
+    """,
+    unsafe_allow_html=True,
+)
+with st.container(key="seo_intro"):
+    st.header(
+        "Johannes Favi provides strategic consulting for governments, nonprofits, universities, "
+        "healthcare systems, and mission-driven organizations on immigration, housing, workforce "
+        "development, organizational leadership, and public policy. Based in Chicago, Illinois."
+    )
+
 # ----------------------------------------------------------------------------
 # SHARED DATA
 # ----------------------------------------------------------------------------
