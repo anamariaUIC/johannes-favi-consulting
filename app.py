@@ -41,6 +41,15 @@ st.markdown(
             --gray: #6b7280;
         }
 
+        /* Force a light background regardless of device/browser dark mode,
+           in case the app hasn't picked up .streamlit/config.toml yet. */
+        html, body,
+        [data-testid="stAppViewContainer"],
+        [data-testid="stMain"],
+        [data-testid="stHeader"] {
+            background-color: #ffffff !important;
+        }
+
         html, body, [class*="css"]  {
             font-family: 'Inter', sans-serif;
         }
