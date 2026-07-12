@@ -1695,8 +1695,10 @@ elif st.session_state.page == "Services":
     with cols[1]:
         with st.container(key="services_photo"):
             st.image("assets/johannes-favi-services.jpg", use_container_width=True)
+    last_i = len(services) - 1
     for i, (title, desc) in enumerate(services):
-        with cols[i % 2]:
+        col_index = 0 if i == last_i else i % 2
+        with cols[col_index]:
             st.markdown(
                 f"<div class='card'><h4>{title}</h4><p>{desc}</p></div>",
                 unsafe_allow_html=True,
