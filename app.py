@@ -457,14 +457,17 @@ elif st.session_state.page == "About":
     st.markdown("<div class='divider'></div>", unsafe_allow_html=True)
 
     st.markdown("<div class='section-label'>Beyond the Work</div>", unsafe_allow_html=True)
-    pcol1, pcol2 = st.columns([1, 2])
+    pcol1, pcol2 = st.columns(2)
     with pcol1:
         st.image("assets/johannes-favi-family.jpg", use_container_width=True)
     with pcol2:
-        st.write(
-            "Johannes is a proud father of three. He enjoys outdoor activities, traveling, and "
-            "exploring cultures around the world with his partner and kids."
-        )
+        st.image("assets/johannes-favi-family2.jpg", use_container_width=True)
+    st.write(
+        "Johannes is a proud father of three. He enjoys outdoor activities, traveling, and "
+        "exploring cultures around the world with his partner and kids. He is also a passionate "
+        "home cook, known for bringing the bold, comforting flavors of his native Benin to the "
+        "table and sharing them generously with family and friends."
+    )
 
     st.markdown("<div class='divider'></div>", unsafe_allow_html=True)
     col1, col2 = st.columns(2)
