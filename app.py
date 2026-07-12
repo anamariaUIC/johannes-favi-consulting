@@ -215,7 +215,7 @@ st.markdown(
             justify-content: space-between;
             gap: 2.5rem;
         }
-        .hero-text { flex: 1.4; min-width: 0; }
+        .hero-text { flex: 1.2; min-width: 0; }
         .hero-photo {
             flex: 1;
             display: flex;
@@ -223,7 +223,7 @@ st.markdown(
         }
         .hero-photo img {
             width: 100%;
-            max-width: 260px;
+            max-width: 340px;
             border-radius: 14px;
             box-shadow: 0 12px 28px rgba(0,0,0,0.35);
             object-fit: cover;
