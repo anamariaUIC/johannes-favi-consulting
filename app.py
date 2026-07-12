@@ -207,6 +207,67 @@ st.markdown(
         .contact-form-wrap iframe {
             border: none;
         }
+
+        /* ---------------- Mobile responsiveness ---------------- */
+        @media (max-width: 768px) {
+            .block-container {
+                padding-left: 1rem;
+                padding-right: 1rem;
+                padding-top: 1rem;
+            }
+            .hero {
+                padding: 1.75rem 1.25rem;
+            }
+            .hero-inner {
+                flex-direction: column;
+                gap: 1.4rem;
+            }
+            .hero-photo {
+                justify-content: center;
+                order: -1;
+            }
+            .hero-photo img {
+                max-width: 190px;
+            }
+            .hero h1 {
+                font-size: 1.65rem;
+                line-height: 1.3;
+            }
+            .hero .subhead {
+                font-size: 0.85rem;
+            }
+            .hero p {
+                font-size: 0.92rem;
+            }
+            .section-title {
+                font-size: 1.4rem;
+            }
+            .card {
+                padding: 1.1rem 1.2rem;
+            }
+            .cta-strip {
+                padding: 1.5rem 1.25rem;
+            }
+            .cta-strip h2 {
+                font-size: 1.3rem;
+            }
+            .cta-strip p {
+                font-size: 0.9rem;
+            }
+            .tag {
+                font-size: 0.78rem;
+                padding: 0.3rem 0.65rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 1.4rem;
+            }
+            .hero-photo img {
+                max-width: 150px;
+            }
+        }
     </style>
     """,
     unsafe_allow_html=True,
@@ -278,6 +339,36 @@ st.markdown(
             font-weight: 600;
         }
         .linkedin-link:hover { background: #1c3a63; }
+
+        @media (max-width: 768px) {
+            .header-row {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.6rem;
+            }
+            .brand-name {
+                font-size: 1.6rem;
+            }
+            .linkedin-link {
+                font-size: 0.8rem;
+                padding: 0.4rem 0.9rem;
+            }
+            .st-key-nav_bar div[data-testid="stHorizontalBlock"] {
+                flex-wrap: wrap !important;
+                gap: 0.2rem 0.6rem !important;
+            }
+            .st-key-nav_bar div[data-testid="column"] {
+                width: auto !important;
+                flex: 0 0 auto !important;
+                min-width: 0 !important;
+            }
+            .st-key-nav_bar button,
+            .nav-active {
+                font-size: 0.82rem !important;
+                padding: 0.25rem 0.1rem 0.45rem 0.1rem !important;
+                white-space: nowrap;
+            }
+        }
     </style>
     """,
     unsafe_allow_html=True,
@@ -635,6 +726,11 @@ elif st.session_state.page == "Contact":
         .cf-submit:hover {{ background-color: #a37d38; color: #ffffff; }}
         .cf-row {{ display: flex; gap: 1rem; }}
         .cf-row > div {{ flex: 1; }}
+
+        @media (max-width: 480px) {{
+            .cf-row {{ flex-direction: column; gap: 0; }}
+            .cf-input, .cf-textarea {{ font-size: 16px; }}
+        }}
         .cf-status {{
             display: none;
             margin-top: 0.8rem;
@@ -716,7 +812,7 @@ elif st.session_state.page == "Contact":
     """
     with st.container():
         st.markdown("<div class='contact-form-wrap'>", unsafe_allow_html=True)
-        components.html(contact_form_html, height=400, scrolling=False)
+        components.html(contact_form_html, height=470, scrolling=False)
         st.markdown("</div>", unsafe_allow_html=True)
 
 # ----------------------------------------------------------------------------
